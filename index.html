@@ -49,15 +49,12 @@
   }
   .team-member.show { opacity:1; transform: translateY(0);}
   .team-member:hover { background: rgba(255,255,255,0.2); transform: translateY(-10px); }
-  .team-member img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 12px; }
-  .team-member h3 { font-size: 1.2rem; }
+  .team-member h3 { font-size: 1.2rem; margin-top: 8px; }
 
   /* Modal */
   .modal { display: none; position: fixed; z-index: 100; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
-  .modal-content { display: flex; align-items: flex-start; gap: 20px; background: #2c2a3a; padding: 30px; border-radius: 25px; max-width: 500px; animation: fadeIn 0.5s; }
-  .modal-content img { width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0; }
-  .modal-text { display: flex; flex-direction: column; justify-content: center; color: #fff; }
-  .close { align-self: flex-start; font-size: 1.6rem; cursor: pointer; color: #fff; margin-bottom: 10px; }
+  .modal-content { display: flex; flex-direction: column; gap: 20px; background: #2c2a3a; padding: 30px; border-radius: 25px; max-width: 400px; animation: fadeIn 0.5s; color: #fff; }
+  .close { align-self: flex-end; font-size: 1.6rem; cursor: pointer; color: #fff; margin-bottom: 10px; }
 
   @keyframes fadeIn { 0% {opacity:0; transform: translateY(-20px);} 100% {opacity:1; transform: translateY(0);} }
 </style>
@@ -94,53 +91,53 @@
 
   <h2>Manager Team</h2>
   <div class="team-row">
-    <div class="team-member" data-id="939164569723633734" data-name="Manager1" data-role="Hlavní manager" onclick="openModal(this)">
-      <img src="" alt="Manager1"><h3>Manager1</h3>
+    <div class="team-member" data-name="Manager1" data-role="Hlavní manager" onclick="openModal(this)">
+      <h3>Manager1</h3>
     </div>
-    <div class="team-member" data-id="123456789012345678" data-name="Manager2" data-role="Manager" onclick="openModal(this)">
-      <img src="" alt="Manager2"><h3>Manager2</h3>
+    <div class="team-member" data-name="Manager2" data-role="Manager" onclick="openModal(this)">
+      <h3>Manager2</h3>
     </div>
-    <div class="team-member" data-id="223344556677889900" data-name="Manager3" data-role="Manager" onclick="openModal(this)">
-      <img src="" alt="Manager3"><h3>Manager3</h3>
+    <div class="team-member" data-name="Manager3" data-role="Manager" onclick="openModal(this)">
+      <h3>Manager3</h3>
     </div>
   </div>
 
   <h2>Admin Team</h2>
   <div class="team-row">
-    <div class="team-member" data-id="987654321098765432" data-name="Admin1" data-role="Admin" onclick="openModal(this)">
-      <img src="" alt="Admin1"><h3>Admin1</h3>
+    <div class="team-member" data-name="Admin1" data-role="Admin" onclick="openModal(this)">
+      <h3>Admin1</h3>
     </div>
-    <div class="team-member" data-id="112233445566778899" data-name="Admin2" data-role="Admin" onclick="openModal(this)">
-      <img src="" alt="Admin2"><h3>Admin2</h3>
+    <div class="team-member" data-name="Admin2" data-role="Admin" onclick="openModal(this)">
+      <h3>Admin2</h3>
     </div>
-    <div class="team-member" data-id="667788990011223344" data-name="Admin3" data-role="Admin" onclick="openModal(this)">
-      <img src="" alt="Admin3"><h3>Admin3</h3>
+    <div class="team-member" data-name="Admin3" data-role="Admin" onclick="openModal(this)">
+      <h3>Admin3</h3>
     </div>
   </div>
 
   <h2>Builder Team</h2>
   <div class="team-row">
-    <div class="team-member" data-id="998877665544332211" data-name="Builder1" data-role="Builder" onclick="openModal(this)">
-      <img src="" alt="Builder1"><h3>Builder1</h3>
+    <div class="team-member" data-name="Builder1" data-role="Builder" onclick="openModal(this)">
+      <h3>Builder1</h3>
     </div>
-    <div class="team-member" data-id="887766554433221100" data-name="Builder2" data-role="Builder" onclick="openModal(this)">
-      <img src="" alt="Builder2"><h3>Builder2</h3>
+    <div class="team-member" data-name="Builder2" data-role="Builder" onclick="openModal(this)">
+      <h3>Builder2</h3>
     </div>
-    <div class="team-member" data-id="776655443322110099" data-name="Builder3" data-role="Builder" onclick="openModal(this)">
-      <img src="" alt="Builder3"><h3>Builder3</h3>
+    <div class="team-member" data-name="Builder3" data-role="Builder" onclick="openModal(this)">
+      <h3>Builder3</h3>
     </div>
   </div>
 
   <h2>Creator Team</h2>
   <div class="team-row">
-    <div class="team-member" data-id="556677889900112233" data-name="Creator1" data-role="Creator" onclick="openModal(this)">
-      <img src="" alt="Creator1"><h3>Creator1</h3>
+    <div class="team-member" data-name="Creator1" data-role="Creator" onclick="openModal(this)">
+      <h3>Creator1</h3>
     </div>
-    <div class="team-member" data-id="445566778899001122" data-name="Creator2" data-role="Creator" onclick="openModal(this)">
-      <img src="" alt="Creator2"><h3>Creator2</h3>
+    <div class="team-member" data-name="Creator2" data-role="Creator" onclick="openModal(this)">
+      <h3>Creator2</h3>
     </div>
-    <div class="team-member" data-id="334455667788990011" data-name="Creator3" data-role="Creator" onclick="openModal(this)">
-      <img src="" alt="Creator3"><h3>Creator3</h3>
+    <div class="team-member" data-name="Creator3" data-role="Creator" onclick="openModal(this)">
+      <h3>Creator3</h3>
     </div>
   </div>
 
@@ -149,13 +146,10 @@
 <!-- Modal -->
 <div id="memberModal" class="modal">
   <div class="modal-content">
-    <img id="modalImg" src="" alt="Foto">
-    <div class="modal-text">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 id="modalName"></h2>
-      <p id="modalRole"></p>
-      <p id="modalInfo">Více informací o tomto členovi týmu.</p>
-    </div>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalName"></h2>
+    <p id="modalRole"></p>
+    <p id="modalInfo">Více informací o tomto členovi týmu.</p>
   </div>
 </div>
 
@@ -174,24 +168,12 @@
   }
   getMCStatus(); setInterval(getMCStatus,30000);
 
-  // Načtení Discord profilovek podle ID
-  document.querySelectorAll('.team-member').forEach(member => {
-    const id = member.getAttribute('data-id');
-    if(id) {
-      const img = member.querySelector('img');
-      img.src = `https://cdn.discordapp.com/avatars/${id}/?size=128`;
-      img.onerror = () => member.remove();
-    } else { member.remove(); }
-  });
-
   // Modal pro admin team
   function openModal(el) {
     const name = el.getAttribute('data-name');
     const role = el.getAttribute('data-role');
-    const img = el.querySelector('img').src;
     document.getElementById('modalName').innerText = name;
     document.getElementById('modalRole').innerText = role;
-    document.getElementById('modalImg').src = img;
     document.getElementById('memberModal').style.display = 'flex';
   }
   function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
