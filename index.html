@@ -16,13 +16,13 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 60px 20px 40px 20px;
+      padding: 80px 20px 40px 20px; /* menší posun dolů */
     }
     header {
       display:flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 60px; /* více prostoru odshora */
+      margin-bottom: 60px;
     }
     header img {
       width: 120px;
@@ -138,27 +138,33 @@
       justify-content: center;
     }
     .modal-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
       background: #2c2a3a;
-      padding: 35px;
+      padding: 30px;
       border-radius: 25px;
-      max-width: 420px;
-      text-align: center;
-      position: relative;
+      max-width: 500px;
       animation: fadeIn 0.5s;
-    }
-    .close {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.6rem;
-      cursor: pointer;
-      color: #fff;
     }
     .modal-content img {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .modal-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #fff;
+    }
+    .close {
+      align-self: flex-start;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #fff;
+      margin-bottom: 10px;
     }
 
     @keyframes fadeIn {
@@ -272,11 +278,13 @@
   <!-- Modal pro člena týmu -->
   <div id="memberModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
       <img id="modalImg" src="" alt="Foto">
-      <h2 id="modalName"></h2>
-      <p id="modalRole"></p>
-      <p id="modalInfo">Více informací o tomto členovi týmu.</p>
+      <div class="modal-text">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalName"></h2>
+        <p id="modalRole"></p>
+        <p id="modalInfo">Více informací o tomto členovi týmu.</p>
+      </div>
     </div>
   </div>
 
