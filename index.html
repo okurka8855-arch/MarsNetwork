@@ -1,11 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
   <title>Mars Network</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #0d0d0d;
+      color: white;
+    }
+    header {
+      padding: 20px;
+      background: #1a1a1a;
+    }
+    header img {
+      max-width: 200px;
+    }
+    nav {
+      margin: 20px 0;
+    }
+    nav button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #ff6600;
+      color: white;
+      transition: background 0.3s;
+    }
+    nav button:hover {
+      background: #cc5200;
+    }
+    section {
+      padding: 60px 20px;
+      min-height: 200px;
+    }
+    #status-box {
+      background: #1a1a1a;
+      display: inline-block;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Vítej na Mars Network!</h1>
-  <p>Testovací web běží 🎉</p>
+  <header>
+    <img src="logo.png" alt="Logo Mars Network">
+    <nav>
+      <button onclick="scrollToSection('discord')">DISCORD</button>
+      <button onclick="scrollToSection('vote')">HLASOVÁNÍ</button>
+      <button onclick="scrollToSection('about')">O NÁS</button>
+      <button onclick="scrollToSection('status')">STATUS</button>
+    </nav>
+  </header>
+
+  <section id="discord">
+    <h2>Discord</h2>
+    <p>Připoj se na náš <a href="https://discord.gg/tvůjInvite" target="_blank">Discord server</a> 🎧</p>
+  </section>
+
+  <section id="vote">
+    <h2>Hlasování</h2>
+    <p>Podpoř nás hlasováním na <a href="https://minecraft-mp.com" target="_blank">hlasovací stránce</a> 👍</p>
+  </section>
+
+  <section id="about">
+    <h2>O nás</h2>
+    <p>Mars Network je super Minecraft server 🚀 Přidej se a hraj s námi!</p>
+  </section>
+
+  <section id="status">
+    <h2>Status serveru</h2>
+    <div id="status-box">Načítám status...</div>
+  </section>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Minecraft server status (změň IP!)
+    const serverIP = "okurka-boxpvp.falixsrv.me:32553";
+    fetch("https://api.mcsrvstat.us/2/" + serverIP)
+      .then(res => res.json())
+      .then(data => {
+        const box = document.getElementById("status-box");
+        if (data.online) {
+          box.innerHTML = "✅ Server je online<br>" +
+                          "Hráči: " + data.players.online + "/" + data.players.max;
+        } else {
+          box.innerHTML = "❌ Server je offline";
+        }
+      });
+  </script>
 </body>
 </html>
