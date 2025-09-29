@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MC Server - Status & Hlasování</title>
+  <title>Mojí Minecraft Server</title> <!-- Název v prohlížeči -->
+  <link rel="icon" type="image/png" href="logo.png"> <!-- Favicon / obrázek -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {margin:0; padding:0; box-sizing:border-box;}
@@ -14,7 +15,6 @@
       display:flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
       padding: 40px 20px;
     }
@@ -84,13 +84,74 @@
       justify-content: center;
       margin-bottom: 30px;
     }
+    /* Admin team */
     .admin-team {
-      margin-top: auto;
+      margin-top: 30px;
       text-align: center;
-      background: rgba(0,0,0,0.2);
-      padding: 20px 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .team-member {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
       border-radius: 20px;
-      min-width: 300px;
+      min-width: 180px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .team-member:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-10px);
+    }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .team-member h3 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    .team-member p {
+      font-size: 1rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left:0; top:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #2c2a3a;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.5s;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+    }
+    .modal-content img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
     }
     @keyframes fadeIn {
       0% {opacity:0; transform: translateY(-20px);}
@@ -103,7 +164,7 @@
     <img src="logo.png" alt="Server Logo">
     <h1>🎮 Mojí Minecraft Server</h1>
   </header>
-  
+
   <div class="status-container">
     <!-- Server Status -->
     <div class="card" id="mcStatus">
@@ -131,10 +192,33 @@
 
   <!-- Admin Team -->
   <div class="admin-team">
-    <h2>Admin Team</h2>
-    <p>Jmeno1 - Admin</p>
-    <p>Jmeno2 - Builder</p>
-    <p>Jmeno3 - Creator</p>
+    <div class="team-member" onclick="openModal('Admin', 'Hlavní admin serveru', 'admin.png')">
+      <img src="admin.png" alt="Admin">
+      <h3>Admin</h3>
+      <p>Hlavní admin</p>
+    </div>
+    <div class="team-member" onclick="openModal('Builder', 'Stavitel map a světa', 'builder.png')">
+      <img src="builder.png" alt="Builder">
+      <h3>Builder</h3>
+      <p>Builder</p>
+    </div>
+    <div class="team-member" onclick="openModal('Creator', 'Tvůrce obsahu a eventů', 'creator.png')">
+      <img src="creator.png" alt="Creator">
+      <h3>Creator</h3>
+      <p>Creator</p>
+    </div>
+    <!-- Přidej další členy podle potřeby -->
+  </div>
+
+  <!-- Modal pro člena týmu -->
+  <div id="memberModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modalImg" src="" alt="Foto">
+      <h2 id="modalName"></h2>
+      <p id="modalRole"></p>
+      <p id="modalInfo"></p>
+    </div>
   </div>
 
   <script>
@@ -150,9 +234,20 @@
         document.getElementById('mcPlayers').innerText = '';
       }
     }
-
     getMCStatus();
     setInterval(getMCStatus, 30000);
+
+    // Modal pro admin team
+    function openModal(name, info, img) {
+      document.getElementById('modalName').innerText = name;
+      document.getElementById('modalRole').innerText = info;
+      document.getElementById('modalImg').src = img;
+      document.getElementById('modalInfo').innerText = "Více informací o tomto členovi týmu."; // můžeš upravit
+      document.getElementById('memberModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('memberModal').style.display = 'none';
+    }
   </script>
 </body>
 </html>
