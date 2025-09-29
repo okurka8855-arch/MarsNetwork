@@ -133,56 +133,36 @@
   <!-- Manager Team -->
   <h2>Manager Team</h2>
   <div class="team-row">
-    <div class="team-member" data-img="manager1.png" onclick="openModal('Manager1','Hlavní manager','manager1.png')">
-      <img src="manager1.png" alt="Manager1"><h3>Manager1</h3>
-    </div>
-    <div class="team-member" data-img="manager2.png" onclick="openModal('Manager2','Manager','manager2.png')">
-      <img src="manager2.png" alt="Manager2"><h3>Manager2</h3>
-    </div>
-    <div class="team-member" data-img="manager3.png" onclick="openModal('Manager3','Manager','manager3.png')">
-      <img src="manager3.png" alt="Manager3"><h3>Manager3</h3>
+    <div class="team-member" data-discordid="939164569723633734" data-role="Manager" data-name="Manager1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
+      <h3>Manager1</h3>
     </div>
   </div>
 
   <!-- Admin Team -->
   <h2>Admin Team</h2>
   <div class="team-row">
-    <div class="team-member" data-img="admin1.png" onclick="openModal('Admin1','Admin','admin1.png')">
-      <img src="admin1.png" alt="Admin1"><h3>Admin1</h3>
-    </div>
-    <div class="team-member" data-img="admin2.png" onclick="openModal('Admin2','Admin','admin2.png')">
-      <img src="admin2.png" alt="Admin2"><h3>Admin2</h3>
-    </div>
-    <div class="team-member" data-img="admin3.png" onclick="openModal('Admin3','Admin','admin3.png')">
-      <img src="admin3.png" alt="Admin3"><h3>Admin3</h3>
+    <div class="team-member" data-discordid="123456789012345678" data-role="Admin" data-name="Admin1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
+      <h3>Admin1</h3>
     </div>
   </div>
 
   <!-- Builder Team -->
   <h2>Builder Team</h2>
   <div class="team-row">
-    <div class="team-member" data-img="builder1.png" onclick="openModal('Builder1','Builder','builder1.png')">
-      <img src="builder1.png" alt="Builder1"><h3>Builder1</h3>
-    </div>
-    <div class="team-member" data-img="builder2.png" onclick="openModal('Builder2','Builder','builder2.png')">
-      <img src="builder2.png" alt="Builder2"><h3>Builder2</h3>
-    </div>
-    <div class="team-member" data-img="builder3.png" onclick="openModal('Builder3','Builder','builder3.png')">
-      <img src="builder3.png" alt="Builder3"><h3>Builder3</h3>
+    <div class="team-member" data-discordid="234567890123456789" data-role="Builder" data-name="Builder1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
+      <h3>Builder1</h3>
     </div>
   </div>
 
   <!-- Creator Team -->
   <h2>Creator Team</h2>
   <div class="team-row">
-    <div class="team-member" data-img="creator1.png" onclick="openModal('Creator1','Creator','creator1.png')">
-      <img src="creator1.png" alt="Creator1"><h3>Creator1</h3>
-    </div>
-    <div class="team-member" data-img="creator2.png" onclick="openModal('Creator2','Creator','creator2.png')">
-      <img src="creator2.png" alt="Creator2"><h3>Creator2</h3>
-    </div>
-    <div class="team-member" data-img="creator3.png" onclick="openModal('Creator3','Creator','creator3.png')">
-      <img src="creator3.png" alt="Creator3"><h3>Creator3</h3>
+    <div class="team-member" data-discordid="345678901234567890" data-role="Creator" data-name="Creator1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
+      <h3>Creator1</h3>
     </div>
   </div>
 </div>
@@ -216,19 +196,30 @@
   getMCStatus();
   setInterval(getMCStatus, 30000);
 
-  // Skryje členy týmu, pokud obrázek neexistuje
-  document.querySelectorAll('.team-member').forEach(member => {
-    const imgSrc = member.getAttribute('data-img');
-    const img = new Image();
-    img.src = imgSrc;
-    img.onerror = () => member.remove(); // odstraní celý div
-  });
+  // Načtení Discord avatarů
+  function loadDiscordAvatars() {
+    document.querySelectorAll('.team-member').forEach(member => {
+      const discordId = member.getAttribute('data-discordid');
+      if(!discordId) return member.remove();
 
-  // Modal pro admin team
-  function openModal(name, role, img) {
+      const avatarUrl = `https://cdn.discordapp.com/avatars/${discordId}/default.png?size=128`;
+      const img = new Image();
+      img.src = avatarUrl;
+      img.onload = () => member.querySelector('img').src = avatarUrl;
+      img.onerror = () => member.remove();
+    });
+  }
+  loadDiscordAvatars();
+
+  // Modal pro Discord team
+  function openModalDiscord(member) {
+    const name = member.getAttribute('data-name');
+    const role = member.getAttribute('data-role');
+    const avatar = member.querySelector('img').src;
+
     document.getElementById('modalName').innerText = name;
     document.getElementById('modalRole').innerText = role;
-    document.getElementById('modalImg').src = img;
+    document.getElementById('modalImg').src = avatar;
     document.getElementById('memberModal').style.display = 'flex';
   }
   function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
