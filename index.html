@@ -60,9 +60,10 @@
     }
     .card p {
       font-size: 1.2rem;
+      margin-bottom: 10px;
     }
     button {
-      margin-top: 10px;
+      margin: 5px 0;
       padding: 10px 20px;
       border:none;
       border-radius: 10px;
@@ -79,47 +80,6 @@
       0% {opacity:0; transform: translateY(-20px);}
       100% {opacity:1; transform: translateY(0);}
     }
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left: 0; top:0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background: #2c2a3a;
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 400px;
-      text-align: center;
-      position: relative;
-      animation: fadeIn 0.5s;
-    }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #fff;
-    }
-    .modal-content a {
-      display:block;
-      margin: 10px 0;
-      text-decoration:none;
-      color:white;
-      background:#6c63ff;
-      padding:10px 15px;
-      border-radius:10px;
-      transition:0.3s;
-    }
-    .modal-content a:hover {
-      background:#574fd6;
-    }
   </style>
 </head>
 <body>
@@ -129,31 +89,26 @@
   </header>
   
   <div class="status-container">
+    <!-- Server Status -->
     <div class="card" id="mcStatus">
       <h2>Server Status</h2>
       <p id="mcServer">Načítám...</p>
+      <p id="mcPlayers">Načítám hráče...</p>
     </div>
+
+    <!-- Discord Status -->
     <div class="card" id="discordStatus">
       <h2>Discord</h2>
       <p id="discordServer">Načítám...</p>
       <button onclick="window.open('https://discord.com/invite/TWŮJ_LINK', '_blank')">Navštívit Discord</button>
     </div>
+
+    <!-- Hlasování -->
     <div class="card" id="vote">
       <h2>Hlasování</h2>
-      <button onclick="openModal()">Discord Hlasování</button>
-      <button onclick="window.open('https://minecraft-mp.com/server-link', '_blank')">Minecraft Hlasování</button>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2>Discord Hlasování</h2>
-      <p>Podpoř náš Discord server hlasováním a získej bonusy ve hře!</p>
-      <a href="https://top.gg/discord-server-link1" target="_blank">Hlasovat na Top.gg</a>
-      <a href="https://discordlist.net/discord-server-link2" target="_blank">Hlasovat na DiscordList</a>
-      <a href="https://discordservers.com/discord-server-link3" target="_blank">Hlasovat na DiscordServers</a>
+      <button onclick="window.open('https://top.gg/discord-server-link1', '_blank')">Hlasovat Top.gg</button>
+      <button onclick="window.open('https://discordlist.net/discord-server-link2', '_blank')">Hlasovat DiscordList</button>
+      <button onclick="window.open('https://discordservers.com/discord-server-link3', '_blank')">Hlasovat DiscordServers</button>
     </div>
   </div>
 
@@ -163,10 +118,11 @@
       try {
         const res = await fetch('https://api.mcsrvstat.us/2/TVUJ_SERVER_IP');
         const data = await res.json();
-        const status = data.online ? `Online: ${data.players.online}/${data.players.max} hráčů` : 'Offline';
-        document.getElementById('mcServer').innerText = status;
+        document.getElementById('mcServer').innerText = data.online ? 'Online' : 'Offline';
+        document.getElementById('mcPlayers').innerText = data.online ? `${data.players.online}/${data.players.max} hráčů online` : '';
       } catch (err) {
         document.getElementById('mcServer').innerText = 'Nepodařilo se načíst';
+        document.getElementById('mcPlayers').innerText = '';
       }
     }
 
@@ -179,13 +135,6 @@
       } catch (err) {
         document.getElementById('discordServer').innerText = 'Nepodařilo se načíst';
       }
-    }
-
-    function openModal() {
-      document.getElementById('myModal').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('myModal').style.display = 'none';
     }
 
     getMCStatus();
