@@ -16,7 +16,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 80px 20px 40px 20px; /* menší posun dolů */
+      padding: 85px 20px 40px 20px;
     }
     header {
       display:flex;
@@ -31,18 +31,9 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
-    h1 {
-      font-size: 2.8rem;
-      text-align:center;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    .status-container {
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 50px;
-    }
+    h1 { font-size: 2.8rem; text-align:center; animation: fadeIn 1.5s ease-in-out; }
+
+    .status-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-bottom: 50px; }
     .card {
       background: rgba(255,255,255,0.1);
       padding: 25px 35px;
@@ -51,18 +42,9 @@
       min-width: 250px;
       transition: 0.3s;
     }
-    .card:hover {
-      transform: translateY(-10px);
-      background: rgba(255,255,255,0.2);
-    }
-    .card h2 {
-      margin-bottom: 15px;
-      font-size: 1.6rem;
-    }
-    .card p {
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-    }
+    .card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.2); }
+    .card h2 { margin-bottom: 15px; font-size: 1.6rem; }
+    .card p { font-size: 1.2rem; margin-bottom: 12px; }
     button {
       margin: 6px 0;
       padding: 12px 25px;
@@ -74,35 +56,14 @@
       cursor:pointer;
       transition: 0.3s;
     }
-    button:hover {
-      background: #574fd6;
-    }
-    .vote-container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 60px;
-    }
+    button:hover { background: #574fd6; }
+
+    .vote-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px; }
+
     /* Admin Team */
-    .admin-team {
-      margin-top: 40px;
-      width: 100%;
-    }
-    .admin-team h2 {
-      width: 100%;
-      text-align: center;
-      margin-top: 30px;
-      margin-bottom: 15px;
-      font-size: 2rem;
-    }
-    .team-row {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 25px;
-    }
+    .admin-team { margin-top: 40px; width: 100%; }
+    .admin-team h2 { width: 100%; text-align: center; margin-top: 30px; margin-bottom: 15px; font-size: 2rem; }
+    .team-row { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px; }
     .team-member {
       background: rgba(255,255,255,0.1);
       padding: 20px;
@@ -112,31 +73,12 @@
       transition: 0.3s;
       text-align: center;
     }
-    .team-member:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-10px);
-    }
-    .team-member img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 12px;
-    }
-    .team-member h3 {
-      font-size: 1.2rem;
-    }
+    .team-member:hover { background: rgba(255,255,255,0.2); transform: translateY(-10px); }
+    .team-member img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 12px; }
+    .team-member h3 { font-size: 1.2rem; }
 
     /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left:0; top:0;
-      width:100%; height:100%;
-      background: rgba(0,0,0,0.85);
-      align-items: center;
-      justify-content: center;
-    }
+    .modal { display: none; position: fixed; z-index: 100; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
     .modal-content {
       display: flex;
       align-items: flex-start;
@@ -147,30 +89,11 @@
       max-width: 500px;
       animation: fadeIn 0.5s;
     }
-    .modal-content img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .modal-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      color: #fff;
-    }
-    .close {
-      align-self: flex-start;
-      font-size: 1.6rem;
-      cursor: pointer;
-      color: #fff;
-      margin-bottom: 10px;
-    }
+    .modal-content img { width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0; }
+    .modal-text { display: flex; flex-direction: column; justify-content: center; color: #fff; }
+    .close { align-self: flex-start; font-size: 1.6rem; cursor: pointer; color: #fff; margin-bottom: 10px; }
 
-    @keyframes fadeIn {
-      0% {opacity:0; transform: translateY(-20px);}
-      100% {opacity:1; transform: translateY(0);}
-    }
+    @keyframes fadeIn { 0% {opacity:0; transform: translateY(-20px);} 100% {opacity:1; transform: translateY(0);} }
   </style>
 </head>
 <body>
@@ -180,21 +103,17 @@
   </header>
 
   <div class="status-container">
-    <!-- Server Status -->
     <div class="card" id="mcStatus">
       <h2>Server Status</h2>
       <p id="mcServer">Načítám...</p>
       <p id="mcPlayers">Načítám hráče...</p>
     </div>
-
-    <!-- Discord -->
     <div class="card" id="discordStatus">
       <h2>Discord</h2>
       <button onclick="window.open('https://discord.com/invite/TWŮJ_LINK', '_blank')">Navštívit Discord</button>
     </div>
   </div>
 
-  <!-- Hlasování -->
   <div class="vote-container">
     <div class="card" id="vote">
       <h2>Hlasování</h2>
@@ -204,20 +123,19 @@
     </div>
   </div>
 
-  <!-- Admin Team -->
   <div class="admin-team">
     <!-- Manager Team -->
     <h2>Manager Team</h2>
     <div class="team-row">
-      <div class="team-member" onclick="openModal('Manager1', 'Hlavní manager', 'manager1.png')">
+      <div class="team-member" data-img="manager1.png" onclick="openModal('Manager1', 'Hlavní manager', 'manager1.png')">
         <img src="manager1.png" alt="Manager1">
         <h3>Manager1</h3>
       </div>
-      <div class="team-member" onclick="openModal('Manager2', 'Manager', 'manager2.png')">
+      <div class="team-member" data-img="manager2.png" onclick="openModal('Manager2', 'Manager', 'manager2.png')">
         <img src="manager2.png" alt="Manager2">
         <h3>Manager2</h3>
       </div>
-      <div class="team-member" onclick="openModal('Manager3', 'Manager', 'manager3.png')">
+      <div class="team-member" data-img="manager3.png" onclick="openModal('Manager3', 'Manager', 'manager3.png')">
         <img src="manager3.png" alt="Manager3">
         <h3>Manager3</h3>
       </div>
@@ -226,15 +144,15 @@
     <!-- Admin Team -->
     <h2>Admin Team</h2>
     <div class="team-row">
-      <div class="team-member" onclick="openModal('Admin1', 'Admin', 'admin1.png')">
+      <div class="team-member" data-img="admin1.png" onclick="openModal('Admin1', 'Admin', 'admin1.png')">
         <img src="admin1.png" alt="Admin1">
         <h3>Admin1</h3>
       </div>
-      <div class="team-member" onclick="openModal('Admin2', 'Admin', 'admin2.png')">
+      <div class="team-member" data-img="admin2.png" onclick="openModal('Admin2', 'Admin', 'admin2.png')">
         <img src="admin2.png" alt="Admin2">
         <h3>Admin2</h3>
       </div>
-      <div class="team-member" onclick="openModal('Admin3', 'Admin', 'admin3.png')">
+      <div class="team-member" data-img="admin3.png" onclick="openModal('Admin3', 'Admin', 'admin3.png')">
         <img src="admin3.png" alt="Admin3">
         <h3>Admin3</h3>
       </div>
@@ -243,15 +161,15 @@
     <!-- Builder Team -->
     <h2>Builder Team</h2>
     <div class="team-row">
-      <div class="team-member" onclick="openModal('Builder1', 'Builder', 'builder1.png')">
+      <div class="team-member" data-img="builder1.png" onclick="openModal('Builder1', 'Builder', 'builder1.png')">
         <img src="builder1.png" alt="Builder1">
         <h3>Builder1</h3>
       </div>
-      <div class="team-member" onclick="openModal('Builder2', 'Builder', 'builder2.png')">
+      <div class="team-member" data-img="builder2.png" onclick="openModal('Builder2', 'Builder', 'builder2.png')">
         <img src="builder2.png" alt="Builder2">
         <h3>Builder2</h3>
       </div>
-      <div class="team-member" onclick="openModal('Builder3', 'Builder', 'builder3.png')">
+      <div class="team-member" data-img="builder3.png" onclick="openModal('Builder3', 'Builder', 'builder3.png')">
         <img src="builder3.png" alt="Builder3">
         <h3>Builder3</h3>
       </div>
@@ -260,22 +178,22 @@
     <!-- Creator Team -->
     <h2>Creator Team</h2>
     <div class="team-row">
-      <div class="team-member" onclick="openModal('Creator1', 'Creator', 'creator1.png')">
+      <div class="team-member" data-img="creator1.png" onclick="openModal('Creator1', 'Creator', 'creator1.png')">
         <img src="creator1.png" alt="Creator1">
         <h3>Creator1</h3>
       </div>
-      <div class="team-member" onclick="openModal('Creator2', 'Creator', 'creator2.png')">
+      <div class="team-member" data-img="creator2.png" onclick="openModal('Creator2', 'Creator', 'creator2.png')">
         <img src="creator2.png" alt="Creator2">
         <h3>Creator2</h3>
       </div>
-      <div class="team-member" onclick="openModal('Creator3', 'Creator', 'creator3.png')">
+      <div class="team-member" data-img="creator3.png" onclick="openModal('Creator3', 'Creator', 'creator3.png')">
         <img src="creator3.png" alt="Creator3">
         <h3>Creator3</h3>
       </div>
     </div>
   </div>
 
-  <!-- Modal pro člena týmu -->
+  <!-- Modal -->
   <div id="memberModal" class="modal">
     <div class="modal-content">
       <img id="modalImg" src="" alt="Foto">
@@ -304,6 +222,14 @@
     getMCStatus();
     setInterval(getMCStatus, 30000);
 
+    // Skryje členy týmu, pokud obrázek neexistuje
+    document.querySelectorAll('.team-member').forEach(member => {
+      const imgSrc = member.getAttribute('data-img');
+      const img = new Image();
+      img.src = imgSrc;
+      img.onerror = () => member.style.display = 'none';
+    });
+
     // Modal pro admin team
     function openModal(name, role, img) {
       document.getElementById('modalName').innerText = name;
@@ -311,9 +237,7 @@
       document.getElementById('modalImg').src = img;
       document.getElementById('memberModal').style.display = 'flex';
     }
-    function closeModal() {
-      document.getElementById('memberModal').style.display = 'none';
-    }
+    function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
   </script>
 </body>
 </html>
