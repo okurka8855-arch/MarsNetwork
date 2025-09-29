@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MC Server - Status</title>
+  <title>MC Server - Status & Hlasování</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {margin:0; padding:0; box-sizing:border-box;}
@@ -14,12 +14,25 @@
       display:flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
+      padding: 40px 20px;
+    }
+    header {
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
     h1 {
-      margin-bottom: 20px;
-      font-size: 3rem;
+      font-size: 2.5rem;
       text-align:center;
       animation: fadeIn 1.5s ease-in-out;
     }
@@ -66,10 +79,55 @@
       0% {opacity:0; transform: translateY(-20px);}
       100% {opacity:1; transform: translateY(0);}
     }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top:0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #2c2a3a;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.5s;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+    }
+    .modal-content a {
+      display:block;
+      margin-top:20px;
+      text-decoration:none;
+      color:white;
+      background:#6c63ff;
+      padding:10px 15px;
+      border-radius:10px;
+      transition:0.3s;
+    }
+    .modal-content a:hover {
+      background:#574fd6;
+    }
   </style>
 </head>
 <body>
-  <h1>🎮 Mojí Minecraft Server</h1>
+  <header>
+    <img src="logo.png" alt="Server Logo"> <!-- sem vlož logo -->
+    <h1>🎮 Mojí Minecraft Server</h1>
+  </header>
+  
   <div class="status-container">
     <div class="card" id="mcStatus">
       <h2>Server Status</h2>
@@ -80,8 +138,19 @@
       <p id="discordServer">Načítám...</p>
     </div>
     <div class="card" id="vote">
-      <h2>Hlasuj pro nás!</h2>
-      <button onclick="window.open('https://minecraft-mp.com/server-link', '_blank')">Hlasovat</button>
+      <h2>Hlasování</h2>
+      <button onclick="openModal()">Discord Hlasování</button>
+      <button onclick="window.open('https://minecraft-mp.com/server-link', '_blank')">Minecraft Hlasování</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Discord Hlasování</h2>
+      <p>Podpoř náš Discord server hlasováním a získáš bonusy ve hře!</p>
+      <a href="https://discord.com/invite/TWŮJ_LINK" target="_blank">Hlasovat na Discordu</a>
     </div>
   </div>
 
@@ -89,7 +158,7 @@
     // Minecraft server status - použití MCAPI
     async function getMCStatus() {
       try {
-        const res = await fetch('https://api.mcsrvstat.us/2/TVUJ_SERVER_IP'); // např. play.example.com
+        const res = await fetch('https://api.mcsrvstat.us/2/TVUJ_SERVER_IP');
         const data = await res.json();
         const status = data.online ? `Online: ${data.players.online}/${data.players.max} hráčů` : 'Offline';
         document.getElementById('mcServer').innerText = status;
@@ -101,7 +170,7 @@
     // Discord status - počet online členů
     async function getDiscordStatus() {
       try {
-        const res = await fetch('https://discord.com/api/guilds/TWŮJ_GUILD_ID/widget.json'); // Discord widget JSON
+        const res = await fetch('https://discord.com/api/guilds/TWŮJ_GUILD_ID/widget.json');
         const data = await res.json();
         document.getElementById('discordServer').innerText = `Online: ${data.presence_count} členů`;
       } catch (err) {
@@ -109,9 +178,16 @@
       }
     }
 
+    function openModal() {
+      document.getElementById('myModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('myModal').style.display = 'none';
+    }
+
     getMCStatus();
     getDiscordStatus();
-    setInterval(getMCStatus, 30000); // každých 30s aktualizovat
+    setInterval(getMCStatus, 30000);
     setInterval(getDiscordStatus, 30000);
   </script>
 </body>
