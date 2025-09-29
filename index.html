@@ -109,7 +109,7 @@
     }
     .modal-content a {
       display:block;
-      margin-top:20px;
+      margin: 10px 0;
       text-decoration:none;
       color:white;
       background:#6c63ff;
@@ -124,7 +124,7 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Server Logo"> <!-- sem vlož logo -->
+    <img src="logo.png" alt="Server Logo">
     <h1>🎮 Mojí Minecraft Server</h1>
   </header>
   
@@ -134,8 +134,9 @@
       <p id="mcServer">Načítám...</p>
     </div>
     <div class="card" id="discordStatus">
-      <h2>Discord Status</h2>
+      <h2>Discord</h2>
       <p id="discordServer">Načítám...</p>
+      <button onclick="window.open('https://discord.com/invite/TWŮJ_LINK', '_blank')">Navštívit Discord</button>
     </div>
     <div class="card" id="vote">
       <h2>Hlasování</h2>
@@ -149,13 +150,15 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <h2>Discord Hlasování</h2>
-      <p>Podpoř náš Discord server hlasováním a získáš bonusy ve hře!</p>
-      <a href="https://discord.com/invite/TWŮJ_LINK" target="_blank">Hlasovat na Discordu</a>
+      <p>Podpoř náš Discord server hlasováním a získej bonusy ve hře!</p>
+      <a href="https://top.gg/discord-server-link1" target="_blank">Hlasovat na Top.gg</a>
+      <a href="https://discordlist.net/discord-server-link2" target="_blank">Hlasovat na DiscordList</a>
+      <a href="https://discordservers.com/discord-server-link3" target="_blank">Hlasovat na DiscordServers</a>
     </div>
   </div>
 
   <script>
-    // Minecraft server status - použití MCAPI
+    // Minecraft server status
     async function getMCStatus() {
       try {
         const res = await fetch('https://api.mcsrvstat.us/2/TVUJ_SERVER_IP');
@@ -167,7 +170,7 @@
       }
     }
 
-    // Discord status - počet online členů
+    // Discord status
     async function getDiscordStatus() {
       try {
         const res = await fetch('https://discord.com/api/guilds/TWŮJ_GUILD_ID/widget.json');
