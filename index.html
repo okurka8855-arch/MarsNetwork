@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Můj Minecraft Server</title>
+<title>Mojí Minecraft Server</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -105,75 +105,64 @@
 <body>
 <header>
   <img src="logo.png" alt="Server Logo">
-  <h1>🎮 Můj Minecraft Server</h1>
+  <h1>🎮 Mojí Minecraft Server</h1>
 </header>
+
+<div class="status-container">
+  <div class="card" id="mcStatus">
+    <h2>Server Status</h2>
+    <p id="mcServer">Načítám...</p>
+    <p id="mcPlayers">Načítám hráče...</p>
+  </div>
+  <div class="card" id="discordStatus">
+    <h2>Discord</h2>
+    <button onclick="window.open('https://discord.com/invite/TWUJ_LINK', '_blank')">Navštívit Discord</button>
+  </div>
+</div>
+
+<div class="vote-container">
+  <div class="card" id="vote">
+    <h2>Hlasování</h2>
+    <button onclick="window.open('https://top.gg/discord-server-link1', '_blank')">Top.gg</button>
+    <button onclick="window.open('https://discordlist.net/discord-server-link2', '_blank')">DiscordList</button>
+    <button onclick="window.open('https://discordservers.com/discord-server-link3', '_blank')">DiscordServers</button>
+  </div>
+</div>
 
 <div class="admin-team">
   <!-- Manager Team -->
   <h2>Manager Team</h2>
   <div class="team-row">
-    <div class="team-member" data-role="Manager" data-name="Manager1" onclick="openModal(this)">
-      <img src="img/manager1.png" alt="Manager1">
+    <div class="team-member" data-discordid="3123565310" data-role="Manager" data-name="Manager1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
       <h3>Manager1</h3>
-    </div>
-    <div class="team-member" data-role="Manager" data-name="Manager2" onclick="openModal(this)">
-      <img src="img/manager2.png" alt="Manager2">
-      <h3>Manager2</h3>
-    </div>
-    <div class="team-member" data-role="Manager" data-name="Manager3" onclick="openModal(this)">
-      <img src="img/manager3.png" alt="Manager3">
-      <h3>Manager3</h3>
     </div>
   </div>
 
   <!-- Admin Team -->
   <h2>Admin Team</h2>
   <div class="team-row">
-    <div class="team-member" data-role="Admin" data-name="Admin1" onclick="openModal(this)">
-      <img src="img/admin1.png" alt="Admin1">
+    <div class="team-member" data-discordid="123456789012345678" data-role="Admin" data-name="Admin1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
       <h3>Admin1</h3>
-    </div>
-    <div class="team-member" data-role="Admin" data-name="Admin2" onclick="openModal(this)">
-      <img src="img/admin2.png" alt="Admin2">
-      <h3>Admin2</h3>
-    </div>
-    <div class="team-member" data-role="Admin" data-name="Admin3" onclick="openModal(this)">
-      <img src="img/admin3.png" alt="Admin3">
-      <h3>Admin3</h3>
     </div>
   </div>
 
   <!-- Builder Team -->
   <h2>Builder Team</h2>
   <div class="team-row">
-    <div class="team-member" data-role="Builder" data-name="Builder1" onclick="openModal(this)">
-      <img src="img/builder1.png" alt="Builder1">
+    <div class="team-member" data-discordid="234567890123456789" data-role="Builder" data-name="Builder1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
       <h3>Builder1</h3>
-    </div>
-    <div class="team-member" data-role="Builder" data-name="Builder2" onclick="openModal(this)">
-      <img src="img/builder2.png" alt="Builder2">
-      <h3>Builder2</h3>
-    </div>
-    <div class="team-member" data-role="Builder" data-name="Builder3" onclick="openModal(this)">
-      <img src="img/builder3.png" alt="Builder3">
-      <h3>Builder3</h3>
     </div>
   </div>
 
   <!-- Creator Team -->
   <h2>Creator Team</h2>
   <div class="team-row">
-    <div class="team-member" data-role="Creator" data-name="Creator1" onclick="openModal(this)">
-      <img src="img/creator1.png" alt="Creator1">
+    <div class="team-member" data-discordid="345678901234567890" data-role="Creator" data-name="Creator1" onclick="openModalDiscord(this)">
+      <img src="" alt="Avatar">
       <h3>Creator1</h3>
-    </div>
-    <div class="team-member" data-role="Creator" data-name="Creator2" onclick="openModal(this)">
-      <img src="img/creator2.png" alt="Creator2">
-      <h3>Creator2</h3>
-    </div>
-    <div class="team-member" data-role="Creator" data-name="Creator3" onclick="openModal(this)">
-      <img src="img/creator3.png" alt="Creator3">
-      <h3>Creator3</h3>
     </div>
   </div>
 </div>
@@ -192,8 +181,38 @@
 </div>
 
 <script>
-  // Modal funkce
-  function openModal(member) {
+  // Minecraft server status
+  async function getMCStatus() {
+    try {
+      const res = await fetch('https://api.mcsrvstat.us/2/TWUJ_SERVER_IP');
+      const data = await res.json();
+      document.getElementById('mcServer').innerText = data.online ? 'Online' : 'Offline';
+      document.getElementById('mcPlayers').innerText = data.online ? `${data.players.online}/${data.players.max} hráčů online` : '';
+    } catch (err) {
+      document.getElementById('mcServer').innerText = 'Nepodařilo se načíst';
+      document.getElementById('mcPlayers').innerText = '';
+    }
+  }
+  getMCStatus();
+  setInterval(getMCStatus, 30000);
+
+  // Načtení Discord avatarů
+  function loadDiscordAvatars() {
+    document.querySelectorAll('.team-member').forEach(member => {
+      const discordId = member.getAttribute('data-discordid');
+      if(!discordId) return member.remove();
+
+      const avatarUrl = `https://cdn.discordapp.com/avatars/${discordId}/default.png?size=128`;
+      const img = new Image();
+      img.src = avatarUrl;
+      img.onload = () => member.querySelector('img').src = avatarUrl;
+      img.onerror = () => member.remove();
+    });
+  }
+  loadDiscordAvatars();
+
+  // Modal pro Discord team
+  function openModalDiscord(member) {
     const name = member.getAttribute('data-name');
     const role = member.getAttribute('data-role');
     const avatar = member.querySelector('img').src;
@@ -203,9 +222,7 @@
     document.getElementById('modalImg').src = avatar;
     document.getElementById('memberModal').style.display = 'flex';
   }
-  function closeModal() {
-    document.getElementById('memberModal').style.display = 'none';
-  }
+  function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
 
   // Animace při scrollu
   function showOnScroll() {
