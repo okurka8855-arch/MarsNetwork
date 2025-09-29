@@ -41,6 +41,7 @@
       gap: 30px;
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: 30px;
     }
     .card {
       background: rgba(255,255,255,0.1);
@@ -76,6 +77,21 @@
     button:hover {
       background: #574fd6;
     }
+    .vote-container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .admin-team {
+      margin-top: auto;
+      text-align: center;
+      background: rgba(0,0,0,0.2);
+      padding: 20px 30px;
+      border-radius: 20px;
+      min-width: 300px;
+    }
     @keyframes fadeIn {
       0% {opacity:0; transform: translateY(-20px);}
       100% {opacity:1; transform: translateY(0);}
@@ -96,20 +112,29 @@
       <p id="mcPlayers">Načítám hráče...</p>
     </div>
 
-    <!-- Discord Status -->
+    <!-- Discord -->
     <div class="card" id="discordStatus">
       <h2>Discord</h2>
-      <p id="discordServer">Načítám...</p>
       <button onclick="window.open('https://discord.com/invite/TWŮJ_LINK', '_blank')">Navštívit Discord</button>
     </div>
+  </div>
 
-    <!-- Hlasování -->
+  <!-- Hlasování -->
+  <div class="vote-container">
     <div class="card" id="vote">
       <h2>Hlasování</h2>
-      <button onclick="window.open('https://top.gg/discord-server-link1', '_blank')">Hlasovat Top.gg</button>
-      <button onclick="window.open('https://discordlist.net/discord-server-link2', '_blank')">Hlasovat DiscordList</button>
-      <button onclick="window.open('https://discordservers.com/discord-server-link3', '_blank')">Hlasovat DiscordServers</button>
+      <button onclick="window.open('https://top.gg/discord-server-link1', '_blank')">Top.gg</button>
+      <button onclick="window.open('https://discordlist.net/discord-server-link2', '_blank')">DiscordList</button>
+      <button onclick="window.open('https://discordservers.com/discord-server-link3', '_blank')">DiscordServers</button>
     </div>
+  </div>
+
+  <!-- Admin Team -->
+  <div class="admin-team">
+    <h2>Admin Team</h2>
+    <p>Jmeno1 - Admin</p>
+    <p>Jmeno2 - Builder</p>
+    <p>Jmeno3 - Creator</p>
   </div>
 
   <script>
@@ -126,21 +151,8 @@
       }
     }
 
-    // Discord status
-    async function getDiscordStatus() {
-      try {
-        const res = await fetch('https://discord.com/api/guilds/TWŮJ_GUILD_ID/widget.json');
-        const data = await res.json();
-        document.getElementById('discordServer').innerText = `Online: ${data.presence_count} členů`;
-      } catch (err) {
-        document.getElementById('discordServer').innerText = 'Nepodařilo se načíst';
-      }
-    }
-
     getMCStatus();
-    getDiscordStatus();
     setInterval(getMCStatus, 30000);
-    setInterval(getDiscordStatus, 30000);
   </script>
 </body>
 </html>
