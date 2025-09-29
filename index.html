@@ -2,193 +2,138 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mars Network</title>
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html {
+      font-family: 'Segoe UI', sans-serif;
       scroll-behavior: smooth;
     }
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #0d0d0d;
-      color: #f5f5f5;
-      text-align: center;
-    }
 
-    /* === Welcome screen === */
-    .welcome {
+    /* Úvodní fullscreen sekce */
+    .landing {
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
-      background: linear-gradient(270deg, #ff6600, #ff3300, #1a1a1a);
-      background-size: 600% 600%;
-      animation: gradientMove 15s ease infinite;
+      color: white;
+      background: linear-gradient(-45deg, #3b82f6, #9333ea, #22c55e, #f59e0b);
+      background-size: 400% 400%;
+      animation: gradient 12s ease infinite;
+      text-align: center;
     }
-    @keyframes gradientMove {
+
+    .landing h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    .landing p {
+      font-size: 1.2rem;
+      margin: 10px 0 30px;
+    }
+
+    .landing button {
+      background: #fff;
+      color: #333;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .landing button:hover {
+      background: #f3f3f3;
+      transform: scale(1.05);
+    }
+
+    @keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    .welcome img {
-      max-width: 200px;
-      margin-bottom: 20px;
-      z-index: 1;
-    }
-    .welcome h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 12px rgba(0,0,0,0.6);
-      z-index: 1;
-    }
-    .welcome button {
-      padding: 14px 28px;
-      font-size: 18px;
-      border: none;
-      border-radius: 25px;
-      background: #fff;
-      color: #ff3300;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-      z-index: 1;
-    }
-    .welcome button:hover {
-      background: #ff6600;
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+
+    /* Hlavní obsah */
+    .content {
+      min-height: 100vh;
+      background: #f9fafb;
+      padding: 50px 20px;
+      text-align: center;
     }
 
-    /* === Header (menu) === */
-    header {
-      background: rgba(20, 20, 20, 0.95);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      padding: 15px 0;
-    }
-    nav button {
-      margin: 8px;
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      background: #ff6600;
-      color: white;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
-    }
-    nav button:hover {
-      background: #ff8533;
-      transform: translateY(-3px);
-    }
-
-    /* === Sekce === */
-    section {
-      padding: 80px 20px;
-      min-height: 300px;
-    }
-    section h2 {
-      margin-bottom: 20px;
-      font-size: 28px;
-      color: #ff6600;
-      text-shadow: 0 0 8px rgba(255,100,0,0.6);
-    }
-    section p, section a {
-      font-size: 18px;
-      color: #ddd;
-    }
-    section a {
-      color: #ff8533;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section a:hover {
-      text-decoration: underline;
-    }
-
-    /* === Status box === */
-    #status-box {
-      background: #222;
+    .card {
       display: inline-block;
-      padding: 25px 40px;
+      background: white;
+      padding: 20px;
       border-radius: 15px;
-      margin-top: 20px;
-      font-size: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      margin: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 300px;
     }
+
+    .buttons a {
+      display: block;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-discord { background: #5865F2; }
+    .btn-discord:hover { background: #4752C4; }
+    .btn-vote { background: #f59e0b; }
+    .btn-vote:hover { background: #d97706; }
+    .btn-about { background: #22c55e; }
+    .btn-about:hover { background: #15803d; }
   </style>
 </head>
 <body>
-  <!-- Welcome screen -->
-  <div class="welcome">
-    <img src="logo.png" alt="Logo Mars Network">
-    <h1>Welcome to Our Minecraft Server</h1>
-    <button onclick="scrollToSection('main')">Pokračovat</button>
-  </div>
-
-  <!-- Menu -->
-  <header id="main">
-    <nav>
-      <button onclick="scrollToSection('discord')">DISCORD</button>
-      <button onclick="scrollToSection('vote')">HLASOVÁNÍ</button>
-      <button onclick="scrollToSection('about')">O NÁS</button>
-      <button onclick="scrollToSection('status')">STATUS</button>
-    </nav>
-  </header>
-
-  <!-- Obsah -->
-  <section id="discord">
-    <h2>Discord</h2>
-    <p>Připoj se na náš <a href="https://discord.gg/tvůjInvite" target="_blank">Discord server</a> 🎧</p>
+  <!-- Úvodní sekce -->
+  <section class="landing">
+    <h1>Mars Network</h1>
+    <p>Welcome to our Minecraft server</p>
+    <button onclick="document.getElementById('main').scrollIntoView()">Pokračovat</button>
   </section>
 
-  <section id="vote">
-    <h2>Hlasování</h2>
-    <p>Podpoř nás hlasováním na <a href="https://minecraft-mp.com" target="_blank">hlasovací stránce</a> 👍</p>
-  </section>
-
-  <section id="about">
-    <h2>O nás</h2>
-    <p>Mars Network je super Minecraft server 🚀 Přidej se a hraj s námi!</p>
-  </section>
-
-  <section id="status">
+  <!-- Hlavní obsah -->
+  <section id="main" class="content">
     <h2>Status serveru</h2>
-    <div id="status-box">Načítám status...</div>
+    <div class="card">
+      <p>IP: <strong>okurka-boxpvp.falixsrv.me:32553</strong></p>
+      <p><span id="status">Načítám...</span></p>
+    </div>
+
+    <h2>Akce</h2>
+    <div class="buttons">
+      <a href="minecraft://?addExternalServer=Mars%20Network|okurka-boxpvp.falixsrv.me:32553" class="btn-vote">Připojit se</a>
+      <a href="https://discord.gg/qQAPDpEmzE" class="btn-discord">Discord</a>
+      <a href="#about" class="btn-about">O nás</a>
+    </div>
   </section>
 
   <script>
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Minecraft server status
-    const serverIP = "okurka-boxpvp.falixsrv.me:32553";
-    fetch("https://api.mcsrvstat.us/2/" + serverIP)
-      .then(res => res.json())
-      .then(data => {
-        const box = document.getElementById("status-box");
+    // API pro status serveru
+    async function loadStatus() {
+      try {
+        const res = await fetch("https://api.mcsrvstat.us/2/okurka-boxpvp.falixsrv.me:32553");
+        const data = await res.json();
+        const status = document.getElementById("status");
         if (data.online) {
-          box.innerHTML = "✅ Server je online<br>" +
-                          "Hráči: " + data.players.online + "/" + data.players.max;
+          status.innerText = `Online ✅ (${data.players.online}/${data.players.max})`;
         } else {
-          box.innerHTML = "❌ Server je offline";
+          status.innerText = "Offline ❌";
         }
-      })
-      .catch(() => {
-        document.getElementById("status-box").innerHTML = "⚠️ Nelze načíst status";
-      });
+      } catch (e) {
+        document.getElementById("status").innerText = "Chyba při načítání";
+      }
+    }
+    loadStatus();
   </script>
 </body>
 </html>
