@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mojí Minecraft Server</title> <!-- Název v prohlížeči -->
-  <link rel="icon" type="image/png" href="logo.png"> <!-- Favicon / obrázek -->
+  <title>Mojí Minecraft Server</title> <!-- Název stránky -->
+  <link rel="icon" type="image/png" href="logo.png"> <!-- Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {margin:0; padding:0; box-sizing:border-box;}
@@ -84,22 +84,33 @@
       justify-content: center;
       margin-bottom: 30px;
     }
-    /* Admin team */
+    /* Admin Team */
     .admin-team {
       margin-top: 30px;
-      text-align: center;
+      width: 100%;
+    }
+    .admin-team h2 {
+      width: 100%;
+      text-align: left;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    .team-row {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: 20px;
     }
     .team-member {
       background: rgba(255,255,255,0.1);
       padding: 20px;
       border-radius: 20px;
-      min-width: 180px;
+      min-width: 150px;
       cursor: pointer;
       transition: 0.3s;
+      text-align: center;
     }
     .team-member:hover {
       background: rgba(255,255,255,0.2);
@@ -112,11 +123,7 @@
       margin-bottom: 10px;
     }
     .team-member h3 {
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
-    .team-member p {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
 
     /* Modal */
@@ -153,6 +160,7 @@
       border-radius: 50%;
       margin-bottom: 15px;
     }
+
     @keyframes fadeIn {
       0% {opacity:0; transform: translateY(-20px);}
       100% {opacity:1; transform: translateY(0);}
@@ -192,22 +200,73 @@
 
   <!-- Admin Team -->
   <div class="admin-team">
-    <div class="team-member" onclick="openModal('Admin', 'Hlavní admin serveru', 'admin.png')">
-      <img src="admin.png" alt="Admin">
-      <h3>Admin</h3>
-      <p>Hlavní admin</p>
+    <!-- Manager Team -->
+    <h2>Manager Team</h2>
+    <div class="team-row">
+      <div class="team-member" onclick="openModal('Manager1', 'Hlavní manager', 'manager1.png')">
+        <img src="manager1.png" alt="Manager1">
+        <h3>Manager1</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Manager2', 'Manager', 'manager2.png')">
+        <img src="manager2.png" alt="Manager2">
+        <h3>Manager2</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Manager3', 'Manager', 'manager3.png')">
+        <img src="manager3.png" alt="Manager3">
+        <h3>Manager3</h3>
+      </div>
     </div>
-    <div class="team-member" onclick="openModal('Builder', 'Stavitel map a světa', 'builder.png')">
-      <img src="builder.png" alt="Builder">
-      <h3>Builder</h3>
-      <p>Builder</p>
+
+    <!-- Admin Team -->
+    <h2>Admin Team</h2>
+    <div class="team-row">
+      <div class="team-member" onclick="openModal('Admin1', 'Admin', 'admin1.png')">
+        <img src="admin1.png" alt="Admin1">
+        <h3>Admin1</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Admin2', 'Admin', 'admin2.png')">
+        <img src="admin2.png" alt="Admin2">
+        <h3>Admin2</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Admin3', 'Admin', 'admin3.png')">
+        <img src="admin3.png" alt="Admin3">
+        <h3>Admin3</h3>
+      </div>
     </div>
-    <div class="team-member" onclick="openModal('Creator', 'Tvůrce obsahu a eventů', 'creator.png')">
-      <img src="creator.png" alt="Creator">
-      <h3>Creator</h3>
-      <p>Creator</p>
+
+    <!-- Builder Team -->
+    <h2>Builder Team</h2>
+    <div class="team-row">
+      <div class="team-member" onclick="openModal('Builder1', 'Builder', 'builder1.png')">
+        <img src="builder1.png" alt="Builder1">
+        <h3>Builder1</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Builder2', 'Builder', 'builder2.png')">
+        <img src="builder2.png" alt="Builder2">
+        <h3>Builder2</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Builder3', 'Builder', 'builder3.png')">
+        <img src="builder3.png" alt="Builder3">
+        <h3>Builder3</h3>
+      </div>
     </div>
-    <!-- Přidej další členy podle potřeby -->
+
+    <!-- Creator Team -->
+    <h2>Creator Team</h2>
+    <div class="team-row">
+      <div class="team-member" onclick="openModal('Creator1', 'Creator', 'creator1.png')">
+        <img src="creator1.png" alt="Creator1">
+        <h3>Creator1</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Creator2', 'Creator', 'creator2.png')">
+        <img src="creator2.png" alt="Creator2">
+        <h3>Creator2</h3>
+      </div>
+      <div class="team-member" onclick="openModal('Creator3', 'Creator', 'creator3.png')">
+        <img src="creator3.png" alt="Creator3">
+        <h3>Creator3</h3>
+      </div>
+    </div>
   </div>
 
   <!-- Modal pro člena týmu -->
@@ -217,7 +276,7 @@
       <img id="modalImg" src="" alt="Foto">
       <h2 id="modalName"></h2>
       <p id="modalRole"></p>
-      <p id="modalInfo"></p>
+      <p id="modalInfo">Více informací o tomto členovi týmu.</p>
     </div>
   </div>
 
@@ -238,11 +297,10 @@
     setInterval(getMCStatus, 30000);
 
     // Modal pro admin team
-    function openModal(name, info, img) {
+    function openModal(name, role, img) {
       document.getElementById('modalName').innerText = name;
-      document.getElementById('modalRole').innerText = info;
+      document.getElementById('modalRole').innerText = role;
       document.getElementById('modalImg').src = img;
-      document.getElementById('modalInfo').innerText = "Více informací o tomto členovi týmu."; // můžeš upravit
       document.getElementById('memberModal').style.display = 'flex';
     }
     function closeModal() {
