@@ -3,52 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mars Network</title>
+  <title>MMP SMP</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    /* Úvodní fullscreen sekce */
-    .landing {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
       background: linear-gradient(-45deg, #3b82f6, #9333ea, #22c55e, #f59e0b);
       background-size: 400% 400%;
-      animation: gradient 12s ease infinite;
-      text-align: center;
-    }
-
-    .landing h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    .landing p {
-      font-size: 1.2rem;
-      margin: 10px 0 30px;
-    }
-
-    .landing button {
-      background: #fff;
-      color: #333;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .landing button:hover {
-      background: #f3f3f3;
-      transform: scale(1.05);
+      animation: gradient 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
     }
 
     @keyframes gradient {
@@ -57,77 +25,101 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Hlavní obsah */
-    .content {
-      min-height: 100vh;
-      background: #f9fafb;
-      padding: 50px 20px;
+    header {
       text-align: center;
+      margin-top: 40px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    header p {
+      margin: 5px 0 20px;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .card {
-      display: inline-block;
-      background: white;
-      padding: 20px;
+      background: rgba(0,0,0,0.65);
+      padding: 20px 30px;
       border-radius: 15px;
-      margin: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      max-width: 300px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+      width: 300px;
+      text-align: center;
     }
 
-    .buttons a {
+    .card h2 {
+      margin-bottom: 15px;
+    }
+
+    .status-online { color: #22c55e; }
+    .status-offline { color: #ef4444; }
+
+    .btn {
       display: block;
       margin: 10px 0;
       padding: 12px;
       border-radius: 8px;
-      color: white;
       text-decoration: none;
+      color: white;
+      font-weight: bold;
       transition: 0.3s;
     }
 
+    .btn-join { background: #3b82f6; }
+    .btn-join:hover { background: #2563eb; }
     .btn-discord { background: #5865F2; }
     .btn-discord:hover { background: #4752C4; }
-    .btn-vote { background: #f59e0b; }
-    .btn-vote:hover { background: #d97706; }
     .btn-about { background: #22c55e; }
     .btn-about:hover { background: #15803d; }
   </style>
 </head>
 <body>
-  <!-- Úvodní sekce -->
-  <section class="landing">
-    <h1>Mars Network</h1>
-    <p>Welcome to our Minecraft server</p>
-    <button onclick="document.getElementById('main').scrollIntoView()">Pokračovat</button>
-  </section>
+  <header>
+    <h1>🌍 MMP SMP</h1>
+    <p>Tvůj nejoblíbenější survival SMP server</p>
+  </header>
 
-  <!-- Hlavní obsah -->
-  <section id="main" class="content">
-    <h2>Status serveru</h2>
+  <div class="container">
+    <!-- Status serveru -->
     <div class="card">
-      <p>IP: <strong>okurka-boxpvp.falixsrv.me:32553</strong></p>
-      <p><span id="status">Načítám...</span></p>
+      <h2>Status serveru</h2>
+      <p>IP: <strong>mmp_smp.aternos.me:27591</strong></p>
+      <p id="status" class="status-offline">Načítám...</p>
     </div>
 
-    <h2>Akce</h2>
-    <div class="buttons">
-      <a href="minecraft://?addExternalServer=Mars%20Network|okurka-boxpvp.falixsrv.me:32553" class="btn-vote">Připojit se</a>
-      <a href="https://discord.gg/qQAPDpEmzE" class="btn-discord">Discord</a>
-      <a href="#about" class="btn-about">O nás</a>
+    <!-- Akce -->
+    <div class="card">
+      <h2>Akce</h2>
+      <a href="minecraft://?addExternalServer=MMP%20SMP|mmp_smp.aternos.me:27591" class="btn btn-join">Připojit se</a>
+      <a href="https://discord.gg/TVŮJ_DISCORD" class="btn btn-discord">Discord</a>
+      <a href="#about" class="btn btn-about">Tým & Pravidla</a>
     </div>
-  </section>
+  </div>
 
   <script>
     // API pro status serveru
     async function loadStatus() {
       try {
-        const res = await fetch("https://api.mcsrvstat.us/2/okurka-boxpvp.falixsrv.me:32553");
+        const res = await fetch("https://api.mcsrvstat.us/2/mmp_smp.aternos.me:27591");
         const data = await res.json();
-        const status = document.getElementById("status");
+        const statusEl = document.getElementById("status");
         if (data.online) {
-          status.innerText = `Online ✅ (${data.players.online}/${data.players.max})`;
+          statusEl.innerText = `Online ✅ (${data.players.online}/${data.players.max})`;
+          statusEl.className = "status-online";
         } else {
-          status.innerText = "Offline ❌";
+          statusEl.innerText = "Offline ❌";
+          statusEl.className = "status-offline";
         }
       } catch (e) {
         document.getElementById("status").innerText = "Chyba při načítání";
