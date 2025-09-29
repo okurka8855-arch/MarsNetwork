@@ -91,6 +91,7 @@
 </div>
 
 <div class="admin-team">
+
   <h2>Manager Team</h2>
   <div class="team-row">
     <div class="team-member" data-id="3123565310" data-name="Manager1" data-role="Hlavní manager" onclick="openModal(this)">
@@ -98,6 +99,9 @@
     </div>
     <div class="team-member" data-id="123456789012345678" data-name="Manager2" data-role="Manager" onclick="openModal(this)">
       <img src="" alt="Manager2"><h3>Manager2</h3>
+    </div>
+    <div class="team-member" data-id="223344556677889900" data-name="Manager3" data-role="Manager" onclick="openModal(this)">
+      <img src="" alt="Manager3"><h3>Manager3</h3>
     </div>
   </div>
 
@@ -109,12 +113,21 @@
     <div class="team-member" data-id="112233445566778899" data-name="Admin2" data-role="Admin" onclick="openModal(this)">
       <img src="" alt="Admin2"><h3>Admin2</h3>
     </div>
+    <div class="team-member" data-id="667788990011223344" data-name="Admin3" data-role="Admin" onclick="openModal(this)">
+      <img src="" alt="Admin3"><h3>Admin3</h3>
+    </div>
   </div>
 
   <h2>Builder Team</h2>
   <div class="team-row">
     <div class="team-member" data-id="998877665544332211" data-name="Builder1" data-role="Builder" onclick="openModal(this)">
       <img src="" alt="Builder1"><h3>Builder1</h3>
+    </div>
+    <div class="team-member" data-id="887766554433221100" data-name="Builder2" data-role="Builder" onclick="openModal(this)">
+      <img src="" alt="Builder2"><h3>Builder2</h3>
+    </div>
+    <div class="team-member" data-id="776655443322110099" data-name="Builder3" data-role="Builder" onclick="openModal(this)">
+      <img src="" alt="Builder3"><h3>Builder3</h3>
     </div>
   </div>
 
@@ -123,7 +136,14 @@
     <div class="team-member" data-id="556677889900112233" data-name="Creator1" data-role="Creator" onclick="openModal(this)">
       <img src="" alt="Creator1"><h3>Creator1</h3>
     </div>
+    <div class="team-member" data-id="445566778899001122" data-name="Creator2" data-role="Creator" onclick="openModal(this)">
+      <img src="" alt="Creator2"><h3>Creator2</h3>
+    </div>
+    <div class="team-member" data-id="334455667788990011" data-name="Creator3" data-role="Creator" onclick="openModal(this)">
+      <img src="" alt="Creator3"><h3>Creator3</h3>
+    </div>
   </div>
+
 </div>
 
 <!-- Modal -->
@@ -147,7 +167,10 @@
       const data = await res.json();
       document.getElementById('mcServer').innerText = data.online ? 'Online' : 'Offline';
       document.getElementById('mcPlayers').innerText = data.online ? `${data.players.online}/${data.players.max} hráčů online` : '';
-    } catch { document.getElementById('mcServer').innerText = 'Nepodařilo se načíst'; document.getElementById('mcPlayers').innerText = ''; }
+    } catch { 
+      document.getElementById('mcServer').innerText = 'Nepodařilo se načíst'; 
+      document.getElementById('mcPlayers').innerText = ''; 
+    }
   }
   getMCStatus(); setInterval(getMCStatus,30000);
 
@@ -156,8 +179,8 @@
     const id = member.getAttribute('data-id');
     if(id) {
       const img = member.querySelector('img');
-      img.src = `https://cdn.discordapp.com/avatars/${id}/?size=128`; // Discord avatar (pokud existuje)
-      img.onerror = () => member.remove(); // odstraní člena pokud avatar neexistuje
+      img.src = `https://cdn.discordapp.com/avatars/${id}/?size=128`;
+      img.onerror = () => member.remove();
     } else { member.remove(); }
   });
 
