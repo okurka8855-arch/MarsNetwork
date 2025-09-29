@@ -1,110 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minecraft Server</title>
+  <title>MC Server - Status</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Welcome screen */
-    .welcome-screen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      display:flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(270deg, #1e3c72, #2a5298, #1e3c72);
-      background-size: 600% 600%;
-      animation: gradientMove 15s ease infinite;
-      z-index: 999;
-      color: white;
-      text-align: center;
+      min-height: 100vh;
     }
-
-    .welcome-screen h1 {
-      font-size: 3rem;
+    h1 {
       margin-bottom: 20px;
+      font-size: 3rem;
+      text-align:center;
+      animation: fadeIn 1.5s ease-in-out;
     }
-
-    .welcome-screen button {
-      padding: 12px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: white;
-      color: #2a5298;
-      font-weight: bold;
+    .status-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 20px;
+      text-align:center;
+      min-width: 220px;
       transition: 0.3s;
     }
-
-    .welcome-screen button:hover {
-      background: #ddd;
+    .card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.2);
     }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
     }
-
-    /* Main content */
-    .main {
-      min-height: 100vh;
-      background: #f4f4f4;
-      padding: 100px 20px;
-      text-align: center;
+    .card p {
+      font-size: 1.2rem;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border:none;
+      border-radius: 10px;
+      background: #6c63ff;
+      color: white;
+      font-weight: bold;
+      cursor:pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #574fd6;
+    }
+    @keyframes fadeIn {
+      0% {opacity:0; transform: translateY(-20px);}
+      100% {opacity:1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
-
-  <!-- Welcome overlay -->
-  <div class="welcome-screen" id="welcome">
-    <h1>Welcome to Our Minecraft Server</h1>
-    <button onclick="enterSite()">Pokračovat</button>
-  </div>
-
-  <!-- Main site -->
-  <div class="main" id="main">
-    <img src="logo.png" alt="Logo" style="width:150px;">
-    <h2>Our Server</h2>
-    <p>Status: Online ✅</p>
-    <button onclick="document.getElementById('discord').scrollIntoView()">DISCORD</button>
-    <button onclick="document.getElementById('vote').scrollIntoView()">HLASOVÁNÍ</button>
-    <button onclick="document.getElementById('about').scrollIntoView()">O NÁS</button>
-  </div>
-
-  <div class="main" id="discord">
-    <h2>Discord</h2>
-    <p>Připoj se na náš Discord server!</p>
-  </div>
-
-  <div class="main" id="vote">
-    <h2>Hlasování</h2>
-    <p>Zde můžeš hlasovat pro server.</p>
-  </div>
-
-  <div class="main" id="about">
-    <h2>O nás</h2>
-    <p>Informace o našem serveru.</p>
+  <h1>🎮 Mojí Minecraft Server</h1>
+  <div class="status-container">
+    <div class="card" id="mcStatus">
+      <h2>Server Status</h2>
+      <p id="mcServer">Načítám...</p>
+    </div>
+    <div class="card" id="discordStatus">
+      <h2>Discord Status</h2>
+      <p id="discordServer">Načítám...</p>
+    </div>
+    <div class="card" id="vote">
+      <h2>Hlasuj pro nás!</h2>
+      <button onclick="window.open('https://minecraft-mp.com/server-link', '_blank')">Hlasovat</button>
+    </div>
   </div>
 
   <script>
-    function enterSite() {
-      document.getElementById("welcome").style.display = "none";
-      document.getElementById("main").scrollIntoView();
+    // Minecraft server status - použití MCAPI
+    async function getMCStatus() {
+      try {
+        const res = await fetch('https://api.mcsrvstat.us/2/TVUJ_SERVER_IP'); // např. play.example.com
+        const data = await res.json();
+        const status = data.online ? `Online: ${data.players.online}/${data.players.max} hráčů` : 'Offline';
+        document.getElementById('mcServer').innerText = status;
+      } catch (err) {
+        document.getElementById('mcServer').innerText = 'Nepodařilo se načíst';
+      }
     }
-  </script>
 
+    // Discord status - počet online členů
+    async function getDiscordStatus() {
+      try {
+        const res = await fetch('https://discord.com/api/guilds/TWŮJ_GUILD_ID/widget.json'); // Discord widget JSON
+        const data = await res.json();
+        document.getElementById('discordServer').innerText = `Online: ${data.presence_count} členů`;
+      } catch (err) {
+        document.getElementById('discordServer').innerText = 'Nepodařilo se načíst';
+      }
+    }
+
+    getMCStatus();
+    getDiscordStatus();
+    setInterval(getMCStatus, 30000); // každých 30s aktualizovat
+    setInterval(getDiscordStatus, 30000);
+  </script>
 </body>
 </html>
