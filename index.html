@@ -3,143 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mojí Minecraft Server</title>
+<title>Můj Minecraft Server</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* --- CSS beze změny --- */
-* {margin:0; padding:0; box-sizing:border-box;}
-body {font-family:'Roboto',sans-serif; background:linear-gradient(135deg,#1f1c2c,#928dab); color:#fff; display:flex; flex-direction:column; align-items:center; min-height:100vh; padding:85px 20px 40px 20px;}
-header {display:flex; flex-direction:column; align-items:center; margin-bottom:60px;}
-header img {width:120px;height:120px;margin-bottom:20px;border-radius:20px;box-shadow:0 0 20px rgba(0,0,0,0.5);}
-h1 {font-size:2.8rem;text-align:center; animation:fadeIn 1.5s ease-in-out;}
-.status-container{display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-bottom:50px;}
-.card{background:rgba(255,255,255,0.1); padding:25px 35px; border-radius:20px; text-align:center; min-width:250px; transition:0.3s;}
-.card:hover{transform:translateY(-10px); background:rgba(255,255,255,0.2);}
-.card h2{margin-bottom:15px; font-size:1.6rem;}
-.card p{font-size:1.2rem; margin-bottom:12px;}
-button{margin:6px 0; padding:12px 25px; border:none; border-radius:12px; background:#6c63ff; color:white; font-weight:bold; cursor:pointer; transition:0.3s;}
-button:hover{background:#574fd6;}
-.vote-container{display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-bottom:60px;}
-.admin-team{margin-top:40px;width:100%;}
-.admin-team h2{width:100%; text-align:center; margin-top:30px;margin-bottom:15px; font-size:2rem;}
-.team-row{display:flex; gap:25px; flex-wrap:wrap; justify-content:center; margin-bottom:25px;}
-.team-member{background:rgba(255,255,255,0.1); padding:20px; border-radius:20px; min-width:150px; cursor:pointer; transition:0.3s; text-align:center; opacity:0; transform:translateY(20px);}
-.team-member.show{opacity:1; transform:translateY(0);}
-.team-member:hover{background:rgba(255,255,255,0.2); transform:translateY(-10px);}
-.team-member img{width:100px; height:100px; border-radius:50%; margin-bottom:12px;}
-.team-member h3{font-size:1.2rem;}
-.modal{display:none; position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.85); align-items:center; justify-content:center;}
-.modal-content{display:flex; align-items:flex-start; gap:20px; background:#2c2a3a; padding:30px; border-radius:25px; max-width:500px; animation:fadeIn 0.5s;}
-.modal-content img{width:120px; height:120px; border-radius:50%; flex-shrink:0;}
-.modal-text{display:flex; flex-direction:column; justify-content:center; color:#fff;}
-.close{align-self:flex-start; font-size:1.6rem; cursor:pointer; color:#fff; margin-bottom:10px;}
-@keyframes fadeIn{0%{opacity:0; transform:translateY(-20px);} 100%{opacity:1; transform:translateY(0);}}
+  * {margin:0; padding:0; box-sizing:border-box;}
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 85px 20px 40px 20px;
+  }
+  header {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  header img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  h1 { font-size: 2.8rem; text-align:center; animation: fadeIn 1.5s ease-in-out; }
+
+  .status-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-bottom: 50px; }
+  .card {
+    background: rgba(255,255,255,0.1);
+    padding: 25px 35px;
+    border-radius: 20px;
+    text-align:center;
+    min-width: 250px;
+    transition: 0.3s;
+  }
+  .card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.2); }
+  .card h2 { margin-bottom: 15px; font-size: 1.6rem; }
+  .card p { font-size: 1.2rem; margin-bottom: 12px; }
+  button {
+    margin: 6px 0;
+    padding: 12px 25px;
+    border:none;
+    border-radius: 12px;
+    background: #6c63ff;
+    color: white;
+    font-weight: bold;
+    cursor:pointer;
+    transition: 0.3s;
+  }
+  button:hover { background: #574fd6; }
+
+  .vote-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px; }
+
+  /* Admin Team */
+  .admin-team { margin-top: 40px; width: 100%; }
+  .admin-team h2 { width: 100%; text-align: center; margin-top: 30px; margin-bottom: 15px; font-size: 2rem; }
+  .team-row { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px; }
+  .team-member {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 20px;
+    min-width: 150px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .team-member.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .team-member:hover { background: rgba(255,255,255,0.2); transform: translateY(-10px); }
+  .team-member img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 12px; }
+  .team-member h3 { font-size: 1.2rem; }
+
+  /* Modal */
+  .modal { display: none; position: fixed; z-index: 100; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
+  .modal-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #2c2a3a;
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 500px;
+    animation: fadeIn 0.5s;
+  }
+  .modal-content img { width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0; }
+  .modal-text { display: flex; flex-direction: column; justify-content: center; color: #fff; }
+  .close { align-self: flex-start; font-size: 1.6rem; cursor: pointer; color: #fff; margin-bottom: 10px; }
+
+  @keyframes fadeIn { 0% {opacity:0; transform: translateY(-20px);} 100% {opacity:1; transform: translateY(0);} }
 </style>
 </head>
 <body>
 <header>
   <img src="logo.png" alt="Server Logo">
-  <h1>🎮 Mojí Minecraft Server</h1>
+  <h1>🎮 Můj Minecraft Server</h1>
 </header>
-
-<div class="status-container">
-  <div class="card" id="mcStatus">
-    <h2>Server Status</h2>
-    <p id="mcServer">Načítám...</p>
-    <p id="mcPlayers">Načítám hráče...</p>
-  </div>
-  <div class="card" id="discordStatus">
-    <h2>Discord</h2>
-    <button onclick="window.open('https://discord.com/invite/TWUJ_LINK', '_blank')">Navštívit Discord</button>
-  </div>
-</div>
-
-<div class="vote-container">
-  <div class="card" id="vote">
-    <h2>Hlasování</h2>
-    <button onclick="window.open('https://top.gg/discord-server-link1', '_blank')">Top.gg</button>
-    <button onclick="window.open('https://discordlist.net/discord-server-link2', '_blank')">DiscordList</button>
-    <button onclick="window.open('https://discordservers.com/discord-server-link3', '_blank')">DiscordServers</button>
-  </div>
-</div>
 
 <div class="admin-team">
   <!-- Manager Team -->
   <h2>Manager Team</h2>
   <div class="team-row">
-    <div class="team-member" data-discordid="3123565310" data-role="Manager" data-name="Manager1" onclick="openModal('modal-manager1')"><img src=""><h3>Manager1</h3></div>
-    <div class="team-member" data-discordid="3123565311" data-role="Manager" data-name="Manager2" onclick="openModal('modal-manager2')"><img src=""><h3>Manager2</h3></div>
-    <div class="team-member" data-discordid="3123565312" data-role="Manager" data-name="Manager3" onclick="openModal('modal-manager3')"><img src=""><h3>Manager3</h3></div>
+    <div class="team-member" data-role="Manager" data-name="Manager1" onclick="openModal(this)">
+      <img src="img/manager1.png" alt="Manager1">
+      <h3>Manager1</h3>
+    </div>
+    <div class="team-member" data-role="Manager" data-name="Manager2" onclick="openModal(this)">
+      <img src="img/manager2.png" alt="Manager2">
+      <h3>Manager2</h3>
+    </div>
+    <div class="team-member" data-role="Manager" data-name="Manager3" onclick="openModal(this)">
+      <img src="img/manager3.png" alt="Manager3">
+      <h3>Manager3</h3>
+    </div>
   </div>
 
   <!-- Admin Team -->
   <h2>Admin Team</h2>
   <div class="team-row">
-    <div class="team-member" data-discordid="123456789012345678" data-role="Admin" data-name="Admin1" onclick="openModal('modal-admin1')"><img src=""><h3>Admin1</h3></div>
-    <div class="team-member" data-discordid="123456789012345679" data-role="Admin" data-name="Admin2" onclick="openModal('modal-admin2')"><img src=""><h3>Admin2</h3></div>
-    <div class="team-member" data-discordid="123456789012345680" data-role="Admin" data-name="Admin3" onclick="openModal('modal-admin3')"><img src=""><h3>Admin3</h3></div>
+    <div class="team-member" data-role="Admin" data-name="Admin1" onclick="openModal(this)">
+      <img src="img/admin1.png" alt="Admin1">
+      <h3>Admin1</h3>
+    </div>
+    <div class="team-member" data-role="Admin" data-name="Admin2" onclick="openModal(this)">
+      <img src="img/admin2.png" alt="Admin2">
+      <h3>Admin2</h3>
+    </div>
+    <div class="team-member" data-role="Admin" data-name="Admin3" onclick="openModal(this)">
+      <img src="img/admin3.png" alt="Admin3">
+      <h3>Admin3</h3>
+    </div>
   </div>
 
   <!-- Builder Team -->
   <h2>Builder Team</h2>
   <div class="team-row">
-    <div class="team-member" data-discordid="234567890123456789" data-role="Builder" data-name="Builder1" onclick="openModal('modal-builder1')"><img src=""><h3>Builder1</h3></div>
-    <div class="team-member" data-discordid="234567890123456780" data-role="Builder" data-name="Builder2" onclick="openModal('modal-builder2')"><img src=""><h3>Builder2</h3></div>
-    <div class="team-member" data-discordid="234567890123456781" data-role="Builder" data-name="Builder3" onclick="openModal('modal-builder3')"><img src=""><h3>Builder3</h3></div>
+    <div class="team-member" data-role="Builder" data-name="Builder1" onclick="openModal(this)">
+      <img src="img/builder1.png" alt="Builder1">
+      <h3>Builder1</h3>
+    </div>
+    <div class="team-member" data-role="Builder" data-name="Builder2" onclick="openModal(this)">
+      <img src="img/builder2.png" alt="Builder2">
+      <h3>Builder2</h3>
+    </div>
+    <div class="team-member" data-role="Builder" data-name="Builder3" onclick="openModal(this)">
+      <img src="img/builder3.png" alt="Builder3">
+      <h3>Builder3</h3>
+    </div>
   </div>
 
   <!-- Creator Team -->
   <h2>Creator Team</h2>
   <div class="team-row">
-    <div class="team-member" data-discordid="345678901234567890" data-role="Creator" data-name="Creator1" onclick="openModal('modal-creator1')"><img src=""><h3>Creator1</h3></div>
-    <div class="team-member" data-discordid="345678901234567891" data-role="Creator" data-name="Creator2" onclick="openModal('modal-creator2')"><img src=""><h3>Creator2</h3></div>
-    <div class="team-member" data-discordid="345678901234567892" data-role="Creator" data-name="Creator3" onclick="openModal('modal-creator3')"><img src=""><h3>Creator3</h3></div>
+    <div class="team-member" data-role="Creator" data-name="Creator1" onclick="openModal(this)">
+      <img src="img/creator1.png" alt="Creator1">
+      <h3>Creator1</h3>
+    </div>
+    <div class="team-member" data-role="Creator" data-name="Creator2" onclick="openModal(this)">
+      <img src="img/creator2.png" alt="Creator2">
+      <h3>Creator2</h3>
+    </div>
+    <div class="team-member" data-role="Creator" data-name="Creator3" onclick="openModal(this)">
+      <img src="img/creator3.png" alt="Creator3">
+      <h3>Creator3</h3>
+    </div>
   </div>
 </div>
 
-<!-- Modaly pro všechny členy (3 na každý tým) -->
-<div id="modal-manager1" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/939164569723633734/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-manager1')">&times;</span><h2>Manager1</h2><p>Manager</p><p>Speciální info pro Manager1...</p></div></div></div>
-<div id="modal-manager2" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/3123565311/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-manager2')">&times;</span><h2>Manager2</h2><p>Manager</p><p>Speciální info pro Manager2...</p></div></div></div>
-<div id="modal-manager3" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/3123565312/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-manager3')">&times;</span><h2>Manager3</h2><p>Manager</p><p>Speciální info pro Manager3...</p></div></div></div>
-
-<div id="modal-admin1" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/123456789012345678/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-admin1')">&times;</span><h2>Admin1</h2><p>Admin</p><p>Speciální info pro Admin1...</p></div></div></div>
-<div id="modal-admin2" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/123456789012345679/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-admin2')">&times;</span><h2>Admin2</h2><p>Admin</p><p>Speciální info pro Admin2...</p></div></div></div>
-<div id="modal-admin3" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/123456789012345680/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-admin3')">&times;</span><h2>Admin3</h2><p>Admin</p><p>Speciální info pro Admin3...</p></div></div></div>
-
-<div id="modal-builder1" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/234567890123456789/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-builder1')">&times;</span><h2>Builder1</h2><p>Builder</p><p>Speciální info pro Builder1...</p></div></div></div>
-<div id="modal-builder2" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/234567890123456780/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-builder2')">&times;</span><h2>Builder2</h2><p>Builder</p><p>Speciální info pro Builder2...</p></div></div></div>
-<div id="modal-builder3" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/234567890123456781/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-builder3')">&times;</span><h2>Builder3</h2><p>Builder</p><p>Speciální info pro Builder3...</p></div></div></div>
-
-<div id="modal-creator1" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/345678901234567890/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-creator1')">&times;</span><h2>Creator1</h2><p>Creator</p><p>Speciální info pro Creator1...</p></div></div></div>
-<div id="modal-creator2" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/345678901234567891/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-creator2')">&times;</span><h2>Creator2</h2><p>Creator</p><p>Speciální info pro Creator2...</p></div></div></div>
-<div id="modal-creator3" class="modal"><div class="modal-content"><img src="https://cdn.discordapp.com/avatars/345678901234567892/default.png?size=128"><div class="modal-text"><span class="close" onclick="closeModal('modal-creator3')">&times;</span><h2>Creator3</h2><p>Creator</p><p>Speciální info pro Creator3...</p></div></div></div>
+<!-- Modal -->
+<div id="memberModal" class="modal">
+  <div class="modal-content">
+    <img id="modalImg" src="" alt="Foto">
+    <div class="modal-text">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalName"></h2>
+      <p id="modalRole"></p>
+      <p id="modalInfo">Více informací o tomto členovi týmu.</p>
+    </div>
+  </div>
+</div>
 
 <script>
-// Minecraft status
-async function getMCStatus(){
-  try{
-    const res=await fetch('https://api.mcsrvstat.us/2/TWUJ_SERVER_IP');
-    const data=await res.json();
-    document.getElementById('mcServer').innerText=data.online?'Online':'Offline';
-    document.getElementById('mcPlayers').innerText=data.online?`${data.players.online}/${data.players.max} hráčů online`:'';
-  }catch(err){document.getElementById('mcServer').innerText='Nepodařilo se načíst'; document.getElementById('mcPlayers').innerText='';}
-}
-getMCStatus(); setInterval(getMCStatus,30000);
+  // Modal funkce
+  function openModal(member) {
+    const name = member.getAttribute('data-name');
+    const role = member.getAttribute('data-role');
+    const avatar = member.querySelector('img').src;
 
-// Načtení avatarů
-document.querySelectorAll('.team-member').forEach(member=>{
-  const id=member.getAttribute('data-discordid'); if(!id) return member.remove();
-  member.querySelector('img').src=`https://cdn.discordapp.com/avatars/${id}/default.png?size=128`;
-});
+    document.getElementById('modalName').innerText = name;
+    document.getElementById('modalRole').innerText = role;
+    document.getElementById('modalImg').src = avatar;
+    document.getElementById('memberModal').style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('memberModal').style.display = 'none';
+  }
 
-// Funkce pro modaly
-function openModal(id){document.getElementById(id).style.display='flex';}
-function closeModal(id){document.getElementById(id).style.display='none';}
-
-// Animace scroll
-function showOnScroll(){document.querySelectorAll('.team-member').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight*0.85) el.classList.add('show');});}
-window.addEventListener('scroll',showOnScroll); window.addEventListener('load',showOnScroll);
+  // Animace při scrollu
+  function showOnScroll() {
+    const elements = document.querySelectorAll('.team-member');
+    const triggerBottom = window.innerHeight * 0.85;
+    elements.forEach(el => {
+      const boxTop = el.getBoundingClientRect().top;
+      if(boxTop < triggerBottom) el.classList.add('show');
+    });
+  }
+  window.addEventListener('scroll', showOnScroll);
+  window.addEventListener('load', showOnScroll);
 </script>
 </body>
 </html>
