@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mojí Minecraft Server</title>
+<title>Mars Network 🌑</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -105,14 +105,14 @@
 <body>
 <header>
   <img src="logo.png" alt="Server Logo">
-  <h1>🎮 Mojí Minecraft Server</h1>
+  <h1>🌑 Mars Network 🌑</h1>
 </header>
 
 <div class="status-container">
   <div class="card" id="mcStatus">
     <h2>Server Status</h2>
-    <p id="mcServer">Načítám...</p>
-    <p id="mcPlayers">Načítám hráče...</p>
+    <p id="mcServer">🌑 Loading</p>
+    <p id="mcPlayers">🌑 Loading Players</p>
   </div>
   <div class="card" id="discordStatus">
     <h2>Discord</h2>
@@ -134,13 +134,13 @@
   <h2>Manager Team</h2>
   <div class="team-row">
     <div class="team-member" data-img="manager1.png" onclick="openModal('Manager1','Hlavní manager','manager1.png')">
-      <img src="manager1.png" alt="Manager1"><h3>Manager1</h3>
+      <img src="manager1.png" alt="okurka8855"><h3>Manager1</h3>
     </div>
     <div class="team-member" data-img="manager2.png" onclick="openModal('Manager2','Manager','manager2.png')">
-      <img src="manager2.png" alt="Manager2"><h3>Manager2</h3>
+      <img src="manager2.png" alt="Filipos___"><h3>Manager2</h3>
     </div>
     <div class="team-member" data-img="manager3.png" onclick="openModal('Manager3','Manager','manager3.png')">
-      <img src="manager3.png" alt="Manager3"><h3>Manager3</h3>
+      <img src="manager3.png" alt="Pantr1x"><h3>Manager3</h3>
     </div>
   </div>
 
@@ -148,13 +148,13 @@
   <h2>Admin Team</h2>
   <div class="team-row">
     <div class="team-member" data-img="admin1.png" onclick="openModal('Admin1','Admin','admin1.png')">
-      <img src="admin1.png" alt="Admin1"><h3>Admin1</h3>
+      <img src="admin1.png" alt="No Admin Found"><h3>Admin1</h3>
     </div>
     <div class="team-member" data-img="admin2.png" onclick="openModal('Admin2','Admin','admin2.png')">
-      <img src="admin2.png" alt="Admin2"><h3>Admin2</h3>
+      <img src="admin2.png" alt="No Admin Found"><h3>Admin2</h3>
     </div>
     <div class="team-member" data-img="admin3.png" onclick="openModal('Admin3','Admin','admin3.png')">
-      <img src="admin3.png" alt="Admin3"><h3>Admin3</h3>
+      <img src="admin3.png" alt="No Adkin Found"><h3>Admin3</h3>
     </div>
   </div>
 
@@ -162,13 +162,13 @@
   <h2>Builder Team</h2>
   <div class="team-row">
     <div class="team-member" data-img="builder1.png" onclick="openModal('Builder1','Builder','builder1.png')">
-      <img src="builder1.png" alt="Builder1"><h3>Builder1</h3>
+      <img src="builder1.png" alt="C1vava"><h3>Builder1</h3>
     </div>
     <div class="team-member" data-img="builder2.png" onclick="openModal('Builder2','Builder','builder2.png')">
-      <img src="builder2.png" alt="Builder2"><h3>Builder2</h3>
+      <img src="builder2.png" alt="No Builder Found"><h3>Builder2</h3>
     </div>
     <div class="team-member" data-img="builder3.png" onclick="openModal('Builder3','Builder','builder3.png')">
-      <img src="builder3.png" alt="Builder3"><h3>Builder3</h3>
+      <img src="builder3.png" alt="No Builder Found"><h3>Builder3</h3>
     </div>
   </div>
 
@@ -176,13 +176,13 @@
   <h2>Creator Team</h2>
   <div class="team-row">
     <div class="team-member" data-img="creator1.png" onclick="openModal('Creator1','Creator','creator1.png')">
-      <img src="creator1.png" alt="Creator1"><h3>Creator1</h3>
+      <img src="creator1.png" alt="No Creator Found"><h3>Creator1</h3>
     </div>
     <div class="team-member" data-img="creator2.png" onclick="openModal('Creator2','Creator','creator2.png')">
-      <img src="creator2.png" alt="Creator2"><h3>Creator2</h3>
+      <img src="creator2.png" alt="No Creator Found"><h3>Creator2</h3>
     </div>
     <div class="team-member" data-img="creator3.png" onclick="openModal('Creator3','Creator','creator3.png')">
-      <img src="creator3.png" alt="Creator3"><h3>Creator3</h3>
+      <img src="creator3.png" alt="No Creator Found"><h3>Creator3</h3>
     </div>
   </div>
 </div>
@@ -204,10 +204,10 @@
   // Minecraft server status
   async function getMCStatus() {
     try {
-      const res = await fetch('https://api.mcsrvstat.us/2/TWUJ_SERVER_IP');
+      const res = await fetch('https://api.mcsrvstat.us/2/191.96.231.2:13319');
       const data = await res.json();
-      document.getElementById('mcServer').innerText = data.online ? 'Online' : 'Offline';
-      document.getElementById('mcPlayers').innerText = data.online ? `${data.players.online}/${data.players.max} hráčů online` : '';
+      document.getElementById('mcServer').innerText = data.online ? 'Online 🟢' : 'Offline 🔴';
+      document.getElementById('mcPlayers').innerText = data.online ? `${data.players.online}/${data.players.max} 🌑 Online` : '';
     } catch (err) {
       document.getElementById('mcServer').innerText = 'Nepodařilo se načíst';
       document.getElementById('mcPlayers').innerText = '';
