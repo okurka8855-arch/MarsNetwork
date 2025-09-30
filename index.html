@@ -74,10 +74,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
-  .team-member.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .team-member.show { opacity: 1; transform: translateY(0); }
   .team-member:hover { background: rgba(255,255,255,0.2); transform: translateY(-10px); }
   .team-member img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 12px; }
   .team-member h3 { font-size: 1.2rem; }
@@ -105,23 +102,12 @@
     overflow-y: auto;
     max-height: 400px;
     line-height:1.5;
-    
-    /* Scrollbar styl */
     scrollbar-width: thin;
     scrollbar-color: #6c63ff rgba(0,0,0,0.2);
   }
-  #rulesModal div::-webkit-scrollbar {
-    width: 8px;
-  }
-  #rulesModal div::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.2);
-    border-radius: 8px;
-  }
-  #rulesModal div::-webkit-scrollbar-thumb {
-    background-color: #6c63ff;
-    border-radius: 8px;
-    border: 2px solid rgba(0,0,0,0.2);
-  }
+  #rulesModal div::-webkit-scrollbar { width: 8px; }
+  #rulesModal div::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 8px; }
+  #rulesModal div::-webkit-scrollbar-thumb { background-color: #6c63ff; border-radius: 8px; border: 2px solid rgba(0,0,0,0.2); }
   #rulesModal h3 { margin-top: 15px; color: #6c63ff; }
 
   /* Footer */
@@ -163,19 +149,71 @@
     <button onclick="window.open('https://czech-craft.eu/server/mars-network/', '_blank')">Czech-craft</button>
     <button onclick="window.open('https://minecraftservery.eu/server/2274', '_blank')">MinecraftServery</button>
   </div>
-
   <div class="card" id="rulesCard">
     <h2>📜 Pravidla 📜</h2>
     <button onclick="openRulesModal()">Zobrazit Pravidla</button>
   </div>
 </div>
 
+<!-- Admin Team -->
 <div class="admin-team">
-  <!-- Team members zde (stejně jako předtím) -->
-  <!-- ... zkráceno pro přehlednost ... -->
+  <h2>Manager Team</h2>
+  <div class="team-row">
+    <div class="team-member" data-img="manager1.png" 
+         onclick="openModal('okurka8855','Main Manager','manager1.png','The main manager takes care of the server operation.\n\n-------------\n\nSocial Sites\n Youtube: https://www.youtube.com/@okurka8855')">
+      <img src="manager1.png" alt="okurka8855"><h3>okurka8855</h3>
+    </div>
+    <div class="team-member" data-img="manager2.png" 
+         onclick="openModal('Filipos___','Manager','manager2.png','Manager takes care of tickets and the entire network and system.')">
+      <img src="manager2.png" alt="Filipos___"><h3>Filipos___</h3>
+    </div>
+    <div class="team-member" data-img="manager3.png" 
+         onclick="openModal('Pantr1x','Manager','manager3.png','Manager takes care of tickets and the entire network and system.\n\n-------------\n\nSocial Sites\n Youtube: https://www.youtube.com/channel/UCBoaFd20uvwryHjRI9RGZNQ')">
+      <img src="manager3.png" alt="Pantr1x"><h3>Pantr1x</h3>
+    </div>
+  </div>
+
+  <h2>Admin Team</h2>
+  <div class="team-row">
+    <div class="team-member" data-img="admin1.png" onclick="openModal('Admin1','Admin','admin1.png','Starám se o moderování a pořádek na serveru.')">
+      <img src="admin1.png" alt="No Admin Found"><h3>Admin1</h3>
+    </div>
+    <div class="team-member" data-img="admin2.png" onclick="openModal('Admin2','Admin','admin2.png','Řeším reporty a pomáhám hráčům.')">
+      <img src="admin2.png" alt="No Admin Found"><h3>Admin2</h3>
+    </div>
+    <div class="team-member" data-img="admin3.png" onclick="openModal('Admin3','Admin','admin3.png','Jsem nový admin a učím se od zkušenějších.')">
+      <img src="admin3.png" alt="No Admin Found"><h3>Admin3</h3>
+    </div>
+  </div>
+
+  <h2>Builder Team</h2>
+  <div class="team-row">
+    <div class="team-member" data-img="builder1.png" onclick="openModal('C1vava','Builder','builder1.png','Builder builds maps helps server.')">
+      <img src="builder1.png" alt="C1vava"><h3>C1vava</h3>
+    </div>
+    <div class="team-member" data-img="builder2.png" onclick="openModal('Builder2','Builder','builder2.png','Pomáhám s mapami a dekoracemi.')">
+      <img src="builder2.png" alt="No Builder Found"><h3>Builder2</h3>
+    </div>
+    <div class="team-member" data-img="builder3.png" onclick="openModal('Builder3','Builder','builder3.png','Rád dělám detailní stavby.')">
+      <img src="builder3.png" alt="No Builder Found"><h3>Builder3</h3>
+    </div>
+  </div>
+
+  <h2>Creator Team</h2>
+  <div class="team-row">
+    <div class="team-member" data-img="creator1.png" onclick="openModal('Creator1','Creator','creator1.png','Tvořím videa a obsah pro sociální sítě.')">
+      <img src="creator1.png" alt="No Creator Found"><h3>Creator1</h3>
+    </div>
+    <div class="team-member" data-img="creator2.png" onclick="openModal('Creator2','Creator','creator2.png','Streamuji server na Twitchi.')">
+      <img src="creator2.png" alt="No Creator Found"><h3>Creator2</h3>
+    </div>
+    <div class="team-member" data-img="creator3.png" onclick="openModal('Creator3','Creator','creator3.png','Dělám trailery a krátká videa.')">
+      <img src="creator3.png" alt="No Creator Found"><h3>Creator3</h3>
+    </div>
+  </div>
 </div>
 
-<!-- Modal Team -->
+<!-- Modály -->
 <div id="memberModal" class="modal">
   <div class="modal-content">
     <img id="modalImg" src="" alt="Foto">
@@ -188,7 +226,6 @@
   </div>
 </div>
 
-<!-- Modal Pravidla -->
 <div id="rulesModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeRulesModal()">&times;</span>
@@ -197,19 +234,15 @@
       <h3>1️⃣ Chování hráčů</h3>
       <p>- Žádný griefing nebo cheating.</p>
       <p>- Respektujte ostatní hráče a staff.</p>
-
       <h3>2️⃣ Chat a komunikace</h3>
       <p>- Žádný spam, reklamy nebo vulgární obsah.</p>
       <p>- Nepoužívejte CAPS LOCK k nadávání.</p>
-
       <h3>3️⃣ PvP a hratelnost</h3>
       <p>- PvP je povoleno pouze na designated arénách.</p>
       <p>- Nesnažte se zneužívat bugy nebo glitchy.</p>
-
       <h3>4️⃣ Staff a pravidla serveru</h3>
       <p>- Rozhodnutí adminů jsou konečná.</p>
       <p>- Pokud máš problém, kontaktuj staff přes ticket systém.</p>
-
       <h3>5️⃣ Další</h3>
       <p>- Server si vyhrazuje právo banovat hráče za porušení pravidel.</p>
       <p>- Pravidla mohou být aktualizována bez předchozího upozornění.</p>
@@ -222,7 +255,6 @@
 </footer>
 
 <script>
-  // Minecraft server status
   async function getMCStatus() {
     try {
       const res = await fetch('https://api.mcsrvstat.us/2/191.96.231.2:13319');
@@ -237,7 +269,6 @@
   getMCStatus();
   setInterval(getMCStatus, 30000);
 
-  // Skryje členy týmu, pokud obrázek neexistuje
   document.querySelectorAll('.team-member').forEach(member => {
     const imgSrc = member.getAttribute('data-img');
     const img = new Image();
@@ -245,7 +276,6 @@
     img.onerror = () => member.remove();
   });
 
-  // Modal pro team
   function openModal(name, role, img, info) {
     document.getElementById('modalName').innerText = name;
     document.getElementById('modalRole').innerText = role;
@@ -255,11 +285,9 @@
   }
   function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
 
-  // Modal pro pravidla
   function openRulesModal() { document.getElementById('rulesModal').style.display = 'flex'; }
   function closeRulesModal() { document.getElementById('rulesModal').style.display = 'none'; }
 
-  // Animace při scrollu
   function showOnScroll() {
     const elements = document.querySelectorAll('.team-member');
     const triggerBottom = window.innerHeight * 0.85;
