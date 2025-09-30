@@ -213,7 +213,7 @@
   </div>
 </div>
 
-<!-- Modály -->
+<!-- Modal Člen -->
 <div id="memberModal" class="modal">
   <div class="modal-content">
     <img id="modalImg" src="" alt="Foto">
@@ -226,35 +226,36 @@
   </div>
 </div>
 
+<!-- Modal Pravidla -->
 <div id="rulesModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeRulesModal()">&times;</span>
-    <h2>Pravidla serveru</h2>
+    <h2>📜 Pravidla Serveru 📜</h2>
     <div>
-      <h3>1️⃣ Chování hráčů</h3>
-      <p>- Žádný griefing nebo cheating.</p>
-      <p>- Respektujte ostatní hráče a staff.</p>
-      <h3>2️⃣ Chat a komunikace</h3>
-      <p>- Žádný spam, reklamy nebo vulgární obsah.</p>
-      <p>- Nepoužívejte CAPS LOCK k nadávání.</p>
-      <h3>3️⃣ PvP a hratelnost</h3>
-      <p>- PvP je povoleno pouze na designated arénách.</p>
-      <p>- Nesnažte se zneužívat bugy nebo glitchy.</p>
-      <h3>4️⃣ Staff a pravidla serveru</h3>
-      <p>- Rozhodnutí adminů jsou konečná.</p>
-      <p>- Pokud máš problém, kontaktuj staff přes ticket systém.</p>
-      <h3>5️⃣ Další</h3>
-      <p>- Server si vyhrazuje právo banovat hráče za porušení pravidel.</p>
-      <p>- Pravidla mohou být aktualizována bez předchozího upozornění.</p>
+      <h3>1. Chování</h3>
+      <p>Respektujte ostatní hráče, žádné urážky, trolling ani griefing.</p>
+      <h3>2. Chat</h3>
+      <p>Nezneužívejte chat, žádné spamování, reklamy či nevhodný obsah.</p>
+      <h3>3. Building</h3>
+      <p>Stavby ostatních hráčů nesmíte ničit ani kopírovat bez povolení.</p>
+      <h3>4. PvP</h3>
+      <p>PvP je povoleno pouze na určených arénách nebo po dohodě.</p>
+      <h3>5. Cheats a Exploity</h3>
+      <p>Je zakázáno používat cheat clienty, hacky nebo exploity.</p>
+      <h3>6. Reporting</h3>
+      <p>Problémy hlaste administrátorům, nikoliv veřejně na chatu.</p>
+      <h3>7. Další pravidla</h3>
+      <p>Respektujte pokyny adminů a pravidla serveru v každé situaci.</p>
     </div>
   </div>
 </div>
 
 <footer>
-  © 2025 Mars Network – All rights reserved
+  &copy; 2025 Mars Network 🌑 | Všechna práva vyhrazena
 </footer>
 
 <script>
+  // Minecraft server status
   async function getMCStatus() {
     try {
       const res = await fetch('https://api.mcsrvstat.us/2/191.96.231.2:13319');
@@ -269,6 +270,7 @@
   getMCStatus();
   setInterval(getMCStatus, 30000);
 
+  // Skryje členy týmu, pokud obrázek neexistuje
   document.querySelectorAll('.team-member').forEach(member => {
     const imgSrc = member.getAttribute('data-img');
     const img = new Image();
@@ -276,6 +278,7 @@
     img.onerror = () => member.remove();
   });
 
+  // Modal pro team
   function openModal(name, role, img, info) {
     document.getElementById('modalName').innerText = name;
     document.getElementById('modalRole').innerText = role;
@@ -285,15 +288,21 @@
   }
   function closeModal() { document.getElementById('memberModal').style.display = 'none'; }
 
+  // Modal pro pravidla
   function openRulesModal() { document.getElementById('rulesModal').style.display = 'flex'; }
   function closeRulesModal() { document.getElementById('rulesModal').style.display = 'none'; }
 
+  // Animace při scrollu (zmizí při scrollu nahoru)
   function showOnScroll() {
     const elements = document.querySelectorAll('.team-member');
     const triggerBottom = window.innerHeight * 0.85;
     elements.forEach(el => {
       const boxTop = el.getBoundingClientRect().top;
-      if(boxTop < triggerBottom) el.classList.add('show');
+      if(boxTop < triggerBottom) {
+        el.classList.add('show');   
+      } else {
+        el.classList.remove('show'); 
+      }
     });
   }
   window.addEventListener('scroll', showOnScroll);
